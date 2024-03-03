@@ -7,7 +7,7 @@ const User = new Schema({
     },
     user:{
         type: String,
-        require: true
+        required: true
     },
     email:{
         type: String,
@@ -15,7 +15,7 @@ const User = new Schema({
     },
     password:{
         type: String,
-        require: true
+        required: true
     },
     CreationDate:{
         type: Date,
@@ -25,7 +25,6 @@ const User = new Schema({
         type: Number,
         default: 0
     }
-
 })
 
-module.exports('users', User)
+module.exports = mongoose.model('users', User)

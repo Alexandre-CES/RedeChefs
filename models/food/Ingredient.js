@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const Ingredient = new Schema({
     Ingredient:{
         type: String,
-        require:true
+        required:true
     },
     type:[
         {
@@ -22,4 +22,4 @@ const Ingredient = new Schema({
     ]
 })
 
-module.exports('ingredients', Ingredient)
+module.exports = mongoose.model('ingredients', Ingredient)

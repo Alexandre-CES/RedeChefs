@@ -5,9 +5,9 @@ const Schema = mongoose.Schema
 const Category = new Schema({
     category:{
         type: String,
-        require:true
+        required: true
     },
 
 })
 
-module.exports('categories', Category)
+module.exports = mongoose.model('categories', Category)

@@ -3,29 +3,57 @@
     const app = express()
     const hbs = require('express-handlebars')
     const mongoose = require('mongoose') 
+    const session = require('express-session')
+    const flash = require('connect-flash')
+
+    //rotas
+        const admin = require('./routes/admin')
 
 //Configs
-    //Middle ware - flash
-        app.use((req,res,next)=>{
-            res.locals.success_msg = req.flash('success_msg')
-            res.locals.error_msg = req.flash('error_msg')
+    //Session
+        app.use(session({
+            secret: 'SegredoSecreto',
+            resave: true,
+            saveUninitialized: true
+        }))
 
+        app.use(flash())
+    //Middleware
+
+        app.use((req,res,next)=>{
+            console.log(`Loading ${req.url}`)
             next()
         })
+
+        //flash
+        app.use((req,res,next)=>{
+
+            res.locals.success_msg = req.flash('success_msg')
+            res.locals.error_msg = req.flash('error_msg')
+            next()
+        })
+
     //Handlebars
         app.engine('hbs', hbs.engine({
-            defaultLayout:'main'
+            defaultLayout:'main',
+            extname: 'hbs'
         }))
         app.set('view engine', 'hbs')
     
     //Mongoose
         mongoose.Promise = global.Promise
-        mongoose.connect('mongo://127.0.0.1:27017/RedeChefs').then(()=>{
+        mongoose.connect('mongodb://127.0.0.1:27017/RedeChefs').then(()=>{
             console.log('Mongo connected')
         }).catch((err)=>{
             console.log(`Couldn't connect database: ${err}`)
         })  
 
+//Routes
+    app.use('/admin', admin)
+
+app.get('/', (req,res)=>{
+    res.render('index')
+})
 
 //App starting
     const PORT = 8081

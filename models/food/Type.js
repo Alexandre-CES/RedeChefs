@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const Type = new Schema({
     type:{
         type: String,
-        require: true
+        required: true
     },
     category:[{
         type: Schema.Types.ObjectId,
@@ -13,4 +13,4 @@ const Type = new Schema({
     }]
 })
 
-module.exports('types', Type)
+module.exports = mongoose.model('types', Type)
