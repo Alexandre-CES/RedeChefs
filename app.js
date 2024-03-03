@@ -5,6 +5,7 @@
     const mongoose = require('mongoose') 
     const session = require('express-session')
     const flash = require('connect-flash')
+    const path = require('path')
 
     //rotas
         const admin = require('./routes/admin')
@@ -32,6 +33,9 @@
             res.locals.error_msg = req.flash('error_msg')
             next()
         })
+        
+        //Static
+        app.use(express.static(path.join(__dirname, 'public')))
 
     //Handlebars
         app.engine('hbs', hbs.engine({

@@ -7,11 +7,13 @@ const User = new Schema({
     },
     user:{
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     email:{
         type: String,
-        required: false
+        required: false,
+        unique: true
     },
     password:{
         type: String,
@@ -20,10 +22,6 @@ const User = new Schema({
     CreationDate:{
         type: Date,
         default: Date.now()
-    },
-    admin:{
-        type: Number,
-        default: 0
     }
 })
 

@@ -1,0 +1,45 @@
+*,html{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+
+    height: 100vh;
+    width: 100vw;
+}
+
+:root{
+    --bg-color: white;
+    --txt-color: black;
+    --low-txt-color:gray;
+    --primary-color:#F7EA19;
+    --secundary-color:#F79919;
+    --tertiary-color:#594114;
+
+    --fontText: sans-serif;
+    --FontMenu: monospace;
+    --fontTitle: Arial, serif;
+}
+
+html[data-theme='light']{
+    --bg-color: white;
+    --txt-color: black;
+    --low-txt-color:gray;
+    --primary-color:#F7EA19;
+    --secundary-color:#F79919;
+    --tertiary-color:#594114;
+
+}
+
+html[data-theme='dark']{
+    --bg-color: black;
+    --txt-color: white;
+    --low-txt-color:gray;
+    --primary-color:#F7EA19;
+    --secundary-color:#F79919;
+    --tertiary-color:#594114;
+
+}
+
+body{
+    background-color: var(--bg-color);
+}

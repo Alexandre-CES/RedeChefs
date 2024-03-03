@@ -14,6 +14,7 @@ const Report = new Schema({
     },
     target: {
         type: Schema.Types.ObjectId,
+        ref: 'users',
         required: true
     },
     reason: {

@@ -1,11 +1,20 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const Ban = new Schema({
+const Status = new Schema({
     user:{
         type: Schema.Types.ObjectId,
         ref: 'users',
-        required: true
+        required: true,
+        unique: true
+    },
+    verified:{
+        type: Boolean,
+        default: false
+    },
+    vip:{
+        type: Boolean,
+        default: false
     },
     warningCount:{
         type: Number,
@@ -29,7 +38,7 @@ const Ban = new Schema({
         type: Date,
         default: null,
         required: false
-    },
+    }
 })
 
-module.exports = mongoose.model('bans', Ban)
+module.exports = mongoose.model('status', Status)
