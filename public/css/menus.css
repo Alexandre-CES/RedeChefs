@@ -1,0 +1,50 @@
+.main-menu{
+    overflow: hidden;
+    position: fixed;
+
+    width: 100%;
+
+    font-size: 1.3em;
+
+    background-color: var(--bg-color);
+}
+
+menu#main-top-menu{
+    columns: 2;
+
+    top: 0;
+    padding: 5px 10px;
+
+}
+
+menu#main-top-menu div{
+    display: flex;
+
+    align-items: center;
+}
+
+menu#main-top-menu > nav{
+    align-content: space-between; 
+
+    text-align: right;
+
+    padding-top: 5px;
+}
+
+menu#main-bottom-menu{
+    bottom: 0;
+
+    border-top: 1px solid var(--light-border-color);
+}
+
+menu#main-bottom-menu > nav > ul{
+    columns: 5;
+
+    padding: 10px;
+
+    list-style-type: none;
+}
+
+menu#main-bottom-menu > nav > ul > li{
+    text-align: center;
+}
