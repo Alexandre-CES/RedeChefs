@@ -1,0 +1,157 @@
+/* MENU */
+.main-menu{
+    overflow: hidden;
+    position: fixed;
+
+    width: 100%;
+
+    font-size: 1.3em;
+
+    background-color: var(--bg-color);
+}
+
+menu#main-top-menu{
+    columns: 2;
+
+    top: 0;
+    padding: 5px 10px;
+
+}
+
+menu#main-top-menu div{
+    display: flex;
+
+    align-items: center;
+}
+
+menu#main-top-menu > nav{
+    align-content: space-between; 
+
+    text-align: right;
+
+    padding-top: 5px;
+}
+
+menu#main-top-menu > nav a{
+
+    color: var(--txt-color);
+}
+
+menu#main-bottom-menu{
+    bottom: 0;
+
+    border-top: 1px solid var(--light-border-color);
+}
+
+menu#main-bottom-menu > nav > ul{
+    columns: 5;
+
+    padding: 10px;
+
+    list-style-type: none;
+}
+
+menu#main-bottom-menu > nav > ul > li{
+    text-align: center;
+}
+
+menu#main-bottom-menu > nav > ul > li a{
+    color: var(--txt-color);
+}
+
+/* REGISTER/LOGIN */
+
+div#register-background{
+    width: 100vw;
+    height: 100vh;
+
+    background: url(https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1) no-repeat center;
+    background-size: cover;
+}
+
+div#register-background > div{
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.main-form-centered-header{
+    position: absolute;
+
+    left: 50%;
+    top: -30px;
+
+    transform: translate(-50%);
+
+    font-size: 5em;
+}
+
+.main-form-centered-header > div{
+
+    height: 80px;
+    width: 80px;
+
+    border-radius: 50%;
+}
+
+.main-form-centered-header > div i{
+    color: black;
+}
+
+.main-form-centered-box > section{
+    padding-top: 50px;
+}
+
+.main-form-centered-box > section > form > div{
+
+    margin: 10px;
+
+    padding-right: 10px;
+    
+    border-radius: 50px;
+
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.568);
+
+    background-color: white;
+}
+
+.main-form-centered-box > section > form > div > label{
+    padding-left: 4px;
+}
+
+.main-form-centered-box > section > form > div > input{
+
+    height: 40px;
+    width: calc(100% - 30px);
+
+    padding-right: 10px;
+
+    outline: 0px;
+
+    border: 0px;
+    border-radius:15px;
+
+    font-size: 1.1em;
+    
+}
+
+.main-form-centered-footer{
+    text-align: center;
+    text-shadow: 1px black;
+
+    color: white;
+}
+
+.main-form-centered-footer > p > a{
+    text-decoration: none;
+
+    text-shadow: 1px black;
+
+    color: var(--secundary-color);
+}
+
+.main-form-centered-footer > p > a:hover{
+
+    color: var(--primary-color);
+}

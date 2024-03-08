@@ -9,6 +9,7 @@
 
     //rotas
         const admin = require('./routes/admin')
+        const account = require('./routes/account')
 
 //Configs
     //Session
@@ -20,6 +21,9 @@
 
         app.use(flash())
     //Middleware
+
+        app.use(express.urlencoded({ extended: true }))
+        app.use(express.json())
 
         app.use((req,res,next)=>{
             console.log(`Loading ${req.url}`)
@@ -54,6 +58,7 @@
 
 //Routes
     app.use('/admin', admin)
+    app.use('/account', account)
 
 app.get('/', (req,res)=>{
     res.render('index')
