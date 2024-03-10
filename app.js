@@ -1,11 +1,14 @@
 //Imports
     const express = require('express')
     const app = express()
+
     const hbs = require('express-handlebars')
     const mongoose = require('mongoose') 
-    const session = require('express-session')
     const flash = require('connect-flash')
     const path = require('path')
+
+    const session = require('express-session')
+    const passport = require('passport')
 
     //rotas
         const admin = require('./routes/admin')
@@ -19,14 +22,20 @@
             saveUninitialized: true
         }))
 
+        app.use(passport.initialize())
+        app.use(passport.session())
+
         app.use(flash())
     //Middleware
 
+        //bodyparser
         app.use(express.urlencoded({ extended: true }))
         app.use(express.json())
 
+        //custom
         app.use((req,res,next)=>{
             console.log(`Loading ${req.url}`)
+            console.log('Session:', req.session);
             next()
         })
 

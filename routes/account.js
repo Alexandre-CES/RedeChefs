@@ -1,16 +1,26 @@
 //Requires
-const express = require('express')
-const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+    const express = require('express')
+    const router = express.Router()
 
-require('../models/user/User')
-require ('../models/user/Status')
+    const mongoose = require('mongoose')
+    const bcrypt = require('bcrypt')
 
-const router = express.Router()
+    const passport = require('passport')
+    const initializePassport = require('../config/auth')
+
+    initializePassport(passport)
+
+    require('../models/user/User')
+    require ('../models/user/Status')
+
+
 
 //Models
-const User = mongoose.model('users')
-const Status = mongoose.model('status')
+    const User = mongoose.model('users')
+    const Status = mongoose.model('status')
+
+
+//Rotas
 
 router.get('/', (req,res) =>{
     res.render('account/index')
@@ -20,8 +30,9 @@ router.all('/register', (req, res)=>{
     if(req.method == 'POST'){
         let errors = []
 
-        let username = req.body.username
         let user = req.body.user
+        let username = req.body.username
+        if(!username){username = user}
         let email = req.body.email
         let password = req.body.password
         let confirm_password = req.body.confirm_password
@@ -46,24 +57,20 @@ router.all('/register', (req, res)=>{
         if(errors.length > 0){
             res.render('account/register', { hide_menu: true, errors: errors })
         }else{
+
             User.findOne({user:user}).then((user)=>{
                 if(user){
                     errors.push('user already exist!')
                     res.render('account/register', { hide_menu: true, errors: errors })
+                }else if(email && email != undefined && email != null && email > 10){
+                    User.findOne({email:email}).then((user)=>{
+                        if(user){
+                            errors.push('email already been used!')
+                            res.render('account/register', { hide_menu: true, errors: errors })
+                        }
+                    })
                 }
             })
-            if(email && email != undefined && email != null && email > 10){
-                User.findOne({email:email}).then((user)=>{
-                    if(user){
-                        errors.push('email already been used!')
-                        res.render('account/register', { hide_menu: true, errors: errors })
-                    }
-                })
-            }
-
-            if(!username){
-                username = user
-            }
 
             let salt = bcrypt.genSaltSync(10)
             let hash = bcrypt.hashSync(password, salt)
@@ -71,10 +78,13 @@ router.all('/register', (req, res)=>{
             const userData ={
                 username : username,
                 user: user,
-                email: email,
                 password: hash
+            } 
+
+            if (email && email.trim() !== '') {
+                userData.email = email
             }
-            
+                
             new User(userData).save().then(()=>{
                 console.log('user created successfuly')
             })
@@ -89,50 +99,27 @@ router.all('/register', (req, res)=>{
     }
 })
 
-router.all('/login', (req, res)=>{
+router.all('/login', (req, res, next)=>{
     if(req.method == 'POST'){
-        let errors = []
-
-        let user = req.body.user
-        let password = req.body.password
-
-        if(
-            !user || user == undefined || user == null 
-            || user.length < 5 || user.length > 20 ||
-
-            !password || password == undefined || password == null 
-            || password.length < 5 || password.length > 30 
-
-        ){
-            errors.push('Invalid fields')
-        }
-
-        if(errors.length > 0){
-            res.render('account/login', { hide_menu: true, errors: errors })
-        }else{
-
-            User.findOne({user:user}).then((user)=>{
-                if(user){
-                    bcrypt.compare(password, user.password, (err, result)=>{
-                        if(err){
-                            errors.push('Internal error')
-                            res.render('account/login', { hide_menu: true, errors: errors })
-                        }
-                        if (result){
-                            console.log('correct password')
-                            res.redirect('/')
-                        }else{
-                            errors.push('incorrect user or password')
-                            res.render('account/login', { hide_menu: true, errors: errors })
-                        }
-                    })
-                }
-            })
-        }
-
+        console.log(req.body);
+        passport.authenticate('local', {
+            successRedirect:'/',
+            failureRedirect:'/account/login',
+            failureFlash: true
+        })(req,res,next)
     }else{
         res.render('account/login', {hide_menu:true})
     }
+})
+
+router.get('/logout', (req,res,next)=>{
+    req.logOut((err)=>{
+        if(err){
+            return next(err)
+        }    
+        req.flash('success_msg','')
+        res.redirect("/")
+    })
 })
 
 module.exports = router
