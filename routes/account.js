@@ -23,79 +23,112 @@
 //Rotas
 
 router.get('/', (req,res) =>{
-    res.render('account/index')
+    
+    if(req.isAuthenticated()){
+        const profile = req.user
+        res.render('account/index', {profile:profile})
+    }else{
+        res.render('account/index')
+    }
 })
 
-router.all('/register', (req, res)=>{
-    if(req.method == 'POST'){
+router.get('/user/:user', (req,res) =>{
+
+    const requestedUser = req.params.user;
+    
+    if(req.isAuthenticated()){
+        const profile = req.user
+
+        if(profile.user === requestedUser){
+            res.redirect('/account/')
+        }else{
+            User.findOne({user:requestedUser}).lean().then((person)=>{
+                res.render('account/index', {profile:person})
+            }).catch((err)=>{
+                res.redirect('/')
+            })
+        }
+    }else{
+        User.findOne({user:requestedUser}).lean().then((person)=>{
+            res.render('account/index', {profile:person})
+        }).catch((err)=>{
+            res.redirect('/')
+        })
+    }
+
+})
+
+router.all('/register', async (req, res) => {
+    if (req.method == 'POST') {
         let errors = []
 
         let user = req.body.user
-        let username = req.body.username
-        if(!username){username = user}
+        let username = req.body.username || user
         let email = req.body.email
         let password = req.body.password
         let confirm_password = req.body.confirm_password
 
-        if(
+        if (
             !user || user == undefined || user == null 
             || user.length < 5 || user.length > 20 ||
-
             !password || password == undefined || password == null 
             || password.length < 5 || password.length > 30 ||
-
             !confirm_password || confirm_password == undefined || confirm_password == null 
             || confirm_password.length < 5 || confirm_password.length > 30
-        ){
+        ) {
             errors.push('Invalid fields, fill correctly all required ones')
         }
 
-        if(password != confirm_password){
-            errors.push('Password must be the same!')
-        }
-
-        if(errors.length > 0){
+        if (errors.length > 0) {
             res.render('account/register', { hide_menu: true, errors: errors })
-        }else{
-
-            User.findOne({user:user}).then((user)=>{
-                if(user){
-                    errors.push('user already exist!')
+        } else {
+            try {
+                const existingUser = await User.findOne({ user: user })
+                if (existingUser) {
+                    errors.push('User already exists!')
                     res.render('account/register', { hide_menu: true, errors: errors })
-                }else if(email && email != undefined && email != null && email > 10){
-                    User.findOne({email:email}).then((user)=>{
-                        if(user){
-                            errors.push('email already been used!')
-                            res.render('account/register', { hide_menu: true, errors: errors })
-                        }
-                    })
+                    return
                 }
-            })
 
-            let salt = bcrypt.genSaltSync(10)
-            let hash = bcrypt.hashSync(password, salt)
+                if (email) {
+                    const existingEmailUser = await User.findOne({ email: email })
+                    if (existingEmailUser) {
+                        errors.push('Email already being used!')
+                        res.render('account/register', { hide_menu: true, errors: errors })
+                        return
+                    }
+                }
 
-            const userData ={
-                username : username,
-                user: user,
-                password: hash
-            } 
+                let salt = bcrypt.genSaltSync(10)
+                let hash = bcrypt.hashSync(password, salt)
 
-            if (email && email.trim() !== '') {
-                userData.email = email
+                const userData = {
+                    username: username,
+                    user: user,
+                    password: hash,
+                    email: email || null
+                }
+
+                const savedUser = await new User(userData).save()
+                console.log('User created successfully:', savedUser)
+
+                const userStatusData = {
+                    user: savedUser._id
+                }
+
+                await new Status(userStatusData).save()
+                console.log('User status created successfully')
+                req.flash('success_msg', 'User created successfully')
+                res.redirect('/account/login')
+
+            } catch (err) {
+                console.error('Error creating user:', err)
+                req.flash('error_msg', 'Error creating user')
+                res.redirect('/account/register')
             }
-                
-            new User(userData).save().then(()=>{
-                console.log('user created successfuly')
-            })
-            
-    
-            res.redirect('/account/login')
-            
-        }  
-
-    }else{
-        res.render('account/register', {hide_menu:true})
+        }
+    } else {
+        res.render('account/register', { hide_menu: true })
     }
 })
 
@@ -120,6 +153,10 @@ router.get('/logout', (req,res,next)=>{
         req.flash('success_msg','')
         res.redirect("/")
     })
+})
+
+router.get('/config', (req,res)=>{
+    res.render('account/config')
 })
 
 module.exports = router

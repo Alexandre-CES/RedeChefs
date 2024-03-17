@@ -2,6 +2,7 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+
 }
 
 :root{
@@ -64,10 +65,11 @@ html[data-theme='dark']{
 }
 
 body{
+    width: 100vw;
+    height: 100vh;
 
     background-color: var(--bg-color);
 }
-
 
 main{
     margin-top: 40px; /* So top menu don't hidde content */

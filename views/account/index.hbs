@@ -1,5 +1,23 @@
+{{#if profile}}
+    
+{{else}}
 
-<main>
-    <p><a href="/account/register">Register</a></p>
-    <p><a href="/account/login">Login</a></p>
+    {{#if message_error}}
+    <div class="message-error">{{message_error}}</div>
+    {{/if}}
+    {{#if mesage_success}}
+    <div class="message_success">{{message_success}}</div>
+    {{/if}}
+
+<main id="main-without-account" class="main-centered-box main-centered-menu">
+    <menu>
+        <nav>
+            <ul>
+                 <li><a href="/account/register" id="main-centered-box-ul-li-a-1" class="btn">Register</a></li>
+                <li><a href="/account/login" id="main-centered-box-ul-li-a-2" class="btn">Login</a></li>
+                <li><a href="/account/config" id="main-centered-box-ul-li-a-3" class="btn"><i class="bi bi-gear-fill"></i></a></li>
+            </ul>
+        </nav>
+    </menu>
 </main>
+{{/if}}

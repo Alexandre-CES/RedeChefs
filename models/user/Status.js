@@ -12,7 +12,7 @@ const Status = new Schema({
         type: Boolean,
         default: false
     },
-    vip:{
+    admin:{
         type: Boolean,
         default: false
     },

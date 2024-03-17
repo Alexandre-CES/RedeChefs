@@ -1,7 +1,10 @@
-.main-form-centered-box{
-    position: absolute;
 
-    top: 50%;
+/* MAIN BOX */
+
+.main-centered-box{
+    position: fixed;
+
+    top: 45%;
     left: 50%;
     
     transform: translate(-50%, -50%);
@@ -10,6 +13,85 @@
 
     border-radius: 40px 40px 30px 30px;
 
-    background-color: rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.274);
+    
+}
+    /* MAIN-MENU */
+    .main-centered-menu{
+        text-align: center;
 
+        background-color: var(--tertiary-color);
+        font-family: var(--fontMenu);
+        font-size: 2em;
+    }
+
+    .main-centered-menu ul{
+        list-style-type: none;
+    }
+
+    .main-centered-menu a{
+        position: fixed;
+
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        text-decoration: none;
+
+        color: var(--secundary-color);
+    }
+
+    .main-centered-menu a:hover{
+        color: var(--primary-color);
+    }
+
+/* BACKGROUND */
+
+.bg-transparency-50{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* TEXT */
+
+.txt-danger{
+
+    font-size: 1.1em;
+    color: red;
+}
+
+.txt-small{
+    font-size: .67em;
+}
+
+/* BUTTON */
+
+.btn{
+    display: inline-block;
+
+    padding: 5px 5px;
+
+    border-radius: 15% 25%;
+
+    cursor: pointer;
+    transition: ease-in-out .3s;
+
+    font: bold 1.1em var(--fontMenu);
+}
+
+.btn:hover{
+    
+    font-size: 1.2em;
+
+    text-shadow: 1px rgba(0, 0, 0, 0.589);
+    
+}
+
+/* MESSAGE */
+
+.message_error{
+    margin-top: 100px;
+
+    font-size: 5em;
+
+    color: white;
+    background-color: red;
 }

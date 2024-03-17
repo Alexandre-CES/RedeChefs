@@ -1,3 +1,18 @@
+
+
+/* SCROLLBAR */
+
+body::-webkit-scrollbar{
+    width: 3px;
+    height: 0px;
+
+    background-color: var(--secundary-color);
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: var(--primary-color);
+}
+
 /* MENU */
 .main-menu{
     overflow: hidden;
@@ -73,7 +88,6 @@ div#register-background > div{
     width: 100vw;
     height: 100vh;
 
-    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .main-form-centered-header{
@@ -136,11 +150,38 @@ div#register-background > div{
     
 }
 
+.main-form-centered-box > section > form > button{
+    margin: 5px 50% 10px;
+
+    transform: translate(-50%);
+
+    border: 1px solid rgba(255, 255, 255, 0.644);
+
+    color: var(--secundary-color);
+    background-color: black;
+}
+
+.main-form-centered-box > section > form > button:hover{
+
+    border-radius: 10px;
+
+    border: 1px solid white;
+
+    color: var(--primary-color);
+}
+
+.main-form-centered-box hr{
+
+    margin-bottom: 10px;
+
+    border: 1px solid rgb(97, 97, 97);
+}
+
 .main-form-centered-footer{
     text-align: center;
     text-shadow: 1px black;
 
-    color: white;
+    color: rgb(180, 180, 180);
 }
 
 .main-form-centered-footer > p > a{
@@ -148,10 +189,58 @@ div#register-background > div{
 
     text-shadow: 1px black;
 
-    color: var(--secundary-color);
+    color: var(--tertiary-color);
 }
 
 .main-form-centered-footer > p > a:hover{
 
-    color: var(--primary-color);
+    color: var(--secundary-color);
 }
+
+/* ACCOUNT */
+
+main#main-without-account{
+    width: 230px;
+    height: 250px;
+}
+    
+a#main-centered-box-ul-li-a-1{top: 20%;}
+a#main-centered-box-ul-li-a-2{top: 50%;}
+a#main-centered-box-ul-li-a-3{top: 80%;}
+
+
+/* NEW RECIPE */
+
+main#main-new-recipe-box{
+    width: 100%;
+
+    padding: 10px;
+
+    text-align: center;
+    font-size: 1.1em;
+
+    color: var(--txt-color);
+    background-color: var(--bg-color);
+}
+
+main#main-new-recipe-box form > div input{
+    width: 50%;
+}
+
+main#main-new-recipe-box form > div textarea{
+    min-width: 100%;
+    max-width: 100%;
+}
+
+/* ADMIN */
+
+    /* INDEX */
+
+    main#admin-main-centered-box{
+        width: 230px;
+        height: 250px;
+    }
+
+    a#admin-main-centered-box-ul-li-a-1{top: 20%;}
+    a#admin-main-centered-box-ul-li-a-2{top: 50%;}
+    a#admin-main-centered-box-ul-li-a-3{top: 80%;}

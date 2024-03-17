@@ -1,0 +1,43 @@
+<main id="main-new-recipe-box">
+    <hr>
+    <h1>Recipe</h1>
+    <small class="txt-danger txt-small">(*)indicates that it's mandatory</small>
+    <form action="/posts/new" method="post">
+        <div>
+            <label for="title">Title<span class="txt-danger">*</span>: </label> <br>
+                <input type="text" name="title" id="title" min="1" max="50" required>
+        </div>
+        <div>
+            <label for="ingredients">Ingredients<span class="txt-danger">*</span>: </label> <br>
+                <textarea name="ingredients" id="ingredients" cols="30" rows="5" placeholder="IMPORTANT: ingredients must be between commas.
+                Ex: milk, 3 eggs, meat, rice" minlength="1" maxlength="1000" required></textarea>
+        </div>
+        <div>
+            <label for="method">Method<span class="txt-danger">*</span>: </label> <br>
+                <textarea name="method" id="method" cols="30" rows="10" minlength="1" maxlength="5000" required></textarea>
+        </div>
+        <div>
+            <label for="description">Description: </label> <br>
+                <textarea name="description" id="description" cols="30" rows="5"  minlength="1" maxlength="1000" placeholder="max: 1000 characters"></textarea>
+        </div>
+        <section id="new-recipe-additionals">
+            <h1>additionals</h1>
+            <label for="diet">Diet: </label>
+            <select name="diet" id="diet" required>
+                <option value="none" selected>none</option>
+                {{#each optdiet}}
+                    <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+
+            <label for="mealTimes">Meal time:</label>
+            <select name="mealTimes" id="mealTimes"  required>
+                <option value="none">none</option>
+                {{#each optMealTimes}}
+                    <option value="{{this}}">{{this}}</option>
+                {{/each}}
+            </select>
+        </section>
+        <button type="submit">Post</button>
+    </form>
+</main>

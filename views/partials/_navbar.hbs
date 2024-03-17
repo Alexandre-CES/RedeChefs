@@ -5,14 +5,19 @@
 <menu id="main-top-menu" class="main-menu">
     {{#if profile}}
 
+    <div>{{profile.user}}</div>
+    
     {{else}}
-    <div><img src="/img/logo.png" alt=""><span>RedeChefs</span></div>
 
+    <div><img src="/img/logo.png" alt=""><span>RedeChefs</span></div>
+    
     {{/if}}
+
     <nav>
         <a href=""><i class="bi bi-bell"></i></a>
         
     </nav>
+
 </menu>
 
 <menu id="main-bottom-menu"  class="main-menu">
@@ -21,7 +26,7 @@
         <ul>
             <li><a href="/"><i class="bi bi-house"></i></a></li>
             <li><a href="#"><i class="bi bi-search"></i></a></li>
-            <li><a href="#"><i class="bi bi-plus-circle"></i></a></li>
+            <li><a href="/posts/new"><i class="bi bi-plus-circle"></i></a></li>
             <li><a href="#"><i class="bi bi-star"></i></a></li>
             <li><a href="/account/"><i class="bi bi-person-circle"></i></a></li>
         </ul>

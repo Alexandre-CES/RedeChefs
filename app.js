@@ -13,6 +13,7 @@
     //rotas
         const admin = require('./routes/admin')
         const account = require('./routes/account')
+        const posts = require('./routes/posts')
 
 //Configs
     //Session
@@ -35,7 +36,6 @@
         //custom
         app.use((req,res,next)=>{
             console.log(`Loading ${req.url}`)
-            console.log('Session:', req.session);
             next()
         })
 
@@ -68,6 +68,7 @@
 //Routes
     app.use('/admin', admin)
     app.use('/account', account)
+    app.use('/posts', posts)
 
 app.get('/', (req,res)=>{
     res.render('index')
