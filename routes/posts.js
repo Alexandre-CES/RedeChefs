@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 require('../models/post/Post')
 require('../models/post/Category')
 const Post = mongoose.model('posts')
+const Category = mongoose.model('categories')
 
 router.get('/post/:id', (req,res)=>{
     res.render('posts/index')
@@ -78,8 +79,8 @@ router.all('/new', async (req,res)=>{
                         if (dietType){
                             categories.push(dietType._id)
                         }
-                        
-                    }else if(mealTimes != 'none'){
+                    }       
+                    if(mealTimes != 'none'){
                         var dietType = await Category.findOne({category:mealTimes})
 
                         if (dietType){
