@@ -103,8 +103,12 @@ div#register-background > div{
 
 .main-form-centered-header > div{
 
+    overflow: hidden;
+
     height: 80px;
     width: 80px;
+
+    margin-top: 40px;
 
     border-radius: 50%;
 }
@@ -114,7 +118,7 @@ div#register-background > div{
 }
 
 .main-form-centered-box > section{
-    padding-top: 50px;
+    padding-top: 80px;
 }
 
 .main-form-centered-box > section > form > div{
