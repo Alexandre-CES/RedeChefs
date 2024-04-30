@@ -26,11 +26,12 @@ body::-webkit-scrollbar{
 }
 
 menu#main-top-menu{
-    columns: 2;
+    display: flex;
+    justify-content: space-between;
 
     top: 0;
     padding: 5px 10px;
-
+    border-bottom: 1px solid var(--light-border-color);
 }
 
 menu#main-top-menu div{
@@ -55,7 +56,6 @@ menu#main-top-menu > nav a{
 menu#main-bottom-menu{
     bottom: 0;
 
-    border-top: 1px solid var(--light-border-color);
 }
 
 menu#main-bottom-menu > nav > ul{
