@@ -189,9 +189,10 @@ div#register-background > div{
 }
 
 .main-form-centered-footer > p > a{
+    
     text-decoration: none;
 
-    text-shadow: 1px black;
+    text-shadow: 1px 1px black;
 
     color: var(--tertiary-color);
 }
@@ -218,6 +219,7 @@ a#main-centered-box-ul-li-a-3{top: 80%;}
 main#main-new-recipe-box{
     width: 100%;
 
+    margin-bottom: 50px;
     padding: 10px;
 
     text-align: center;

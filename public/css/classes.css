@@ -11,6 +11,7 @@
 
     padding: 10px;
 
+    border: 1px solid var(--light-border-color);
     border-radius: 40px 40px 30px 30px;
 
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.274);
@@ -87,11 +88,28 @@
 
 /* MESSAGE */
 
-.message_error{
-    margin-top: 100px;
+.message_popup{
+    position: absolute;
 
-    font-size: 5em;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    display: flex;
+    align-items: center;
+
+    min-width: 250px;
+    padding: 3px;
+
+    text-align: left;
+    font-size: 1.5em;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.445);
 
     color: white;
-    background-color: red;
+    background-color: rgb(255, 60, 60);
+}
+
+.message_popup > div{
+    min-width: 30px;
+    height: 100%;
 }

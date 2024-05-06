@@ -138,10 +138,10 @@ router.all('/login', (req, res, next)=>{
         passport.authenticate('local', {
             successRedirect:'/',
             failureRedirect:'/account/login',
-            failureFlash: true
+            failureFlash: true,
         })(req,res,next)
     }else{
-        res.render('account/login', {hide_menu:true})
+        res.render('account/login', {hide_menu:true, message: req.flash('error')})
     }
 })
 

@@ -39,7 +39,7 @@ html[data-theme='light']{
     --txt-color: black;
 
     --lighter-border-color:lightgray;
-    --light-boder-color: gray;
+    --light-border-color: gray;
     --border-color:black;
 
     --primary-color:#F7EA19;
@@ -56,7 +56,7 @@ html[data-theme='dark']{
     --txt-color: white;
 
     --lighter-border-color:rgb(88, 88, 88);
-    --light-boder-color: gray;
+    --light-border-color: gray;
     --border-color: white;
 
     --primary-color:#F7EA19;

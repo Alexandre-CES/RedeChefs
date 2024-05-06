@@ -25,6 +25,14 @@ router.get('/', async (req,res)=>{
     }
 })
 
+router.all('/reports', async (req,res) =>{
+    if(req.method == 'POST'){
+
+    }else{
+        res.render('admin/reports')
+    }
+})
+
 router.get('/create', async (req,res)=>{
     if(req.isAuthenticated()){
 
