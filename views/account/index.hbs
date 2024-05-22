@@ -1,5 +1,29 @@
 {{#if profile}}
-    
+
+<main>
+    <section id="account_user_section">
+        <div>
+            <div id="account_picture_place">
+
+            </div>
+            <div id="account_user_info">
+                <div>{{profile.user}}</div>
+                <div>
+                    <div>{{followers}}</div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <div id="account_bio">
+
+        </div>
+    </section>
+    <section id="account_posts">
+
+    </section>
+</main>
+
+<!-- If user is not logged in and is trying to GET his /account -->  
 {{else}}
 
     {{#if message_error}}
@@ -10,14 +34,12 @@
     {{/if}}
 
 <main id="main-without-account" class="main-centered-box main-centered-menu">
-    <menu>
-        <nav>
-            <ul>
-                 <li><a href="/account/register" id="main-centered-box-ul-li-a-1" class="btn">Register</a></li>
-                <li><a href="/account/login" id="main-centered-box-ul-li-a-2" class="btn">Login</a></li>
-                <li><a href="/account/config" id="main-centered-box-ul-li-a-3" class="btn"><i class="bi bi-gear-fill"></i></a></li>
-            </ul>
-        </nav>
-    </menu>
+    <nav>
+        <ul>
+            <li><a href="/account/register" class="btn">Register</a></li>
+            <li><a href="/account/login" class="btn">Login</a></li>
+            <li><a href="/account/config" class="btn"><i class="bi bi-gear-fill"></i></a></li>
+        </ul>
+    </nav>
 </main>
 {{/if}}

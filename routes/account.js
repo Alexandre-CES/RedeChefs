@@ -12,13 +12,16 @@
 
     require('../models/user/User')
     require ('../models/user/Status')
+    require('../models/user/Follower')
+    require('../models/user/Following')
 
 
 
 //Models
     const User = mongoose.model('users')
     const Status = mongoose.model('status')
-
+    const Follower = mongoose.model('followers')
+    const Following = mongoose.model('following')
 
 //Rotas
 
@@ -43,6 +46,10 @@ router.get('/user/:user', (req,res) =>{
             res.redirect('/account/')
         }else{
             User.findOne({user:requestedUser}).lean().then((person)=>{
+
+                //const followers_count = Follower.countDocuments({user:person._id})
+                //const following_count = Following.countDocuments({user:person._id})
+
                 res.render('account/index', {profile:person})
             }).catch((err)=>{
                 res.redirect('/')
