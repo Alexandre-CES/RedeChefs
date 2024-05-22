@@ -2,21 +2,39 @@
 
 <main>
     <section id="account_user_section">
-        <div>
+        <section id="account_user_flex_section">
             <div id="account_picture_place">
 
             </div>
             <div id="account_user_info">
-                <div>{{profile.user}}</div>
                 <div>
-                    <div>{{followers}}</div>
-                    <div></div>
+                    <div>{{profile.user}}</div>
+                    <div id="follow_unfollow_div">
+                        <a href="#" class="btn"><i class="bi bi-plus"></i></a>
+                    </div>
+                </div>
+                <div id="account_user_info_numbers">
+                    <div>
+                        <div>123</div>
+                        <span>followers</span>
+                    </div>
+                    <div>
+                        <div>123</div>
+                        <span>following</span>
+                    </div>
+                    <div>
+                        <div>123</div>
+                        <span>posts</span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="account_bio">
-
-        </div>
+        </section>
+        <section id="account_bio">
+            <div>
+                {{profile.username}}
+            </div>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa repellendus ut aliquam nam iure perspiciatis exercitationem debitis tenetur velit natus impedit, facere unde, est quas sunt! Repudiandae aspernatur quos dolorem.
+        </section>
     </section>
     <section id="account_posts">
 

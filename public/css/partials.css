@@ -121,7 +121,7 @@ div#register-background > div{
     padding-top: 80px;
 }
 
-.main-form-centered-box > section > form > div{
+.main-form-centered-box > section > form > section{
 
     margin: 10px;
 
@@ -134,11 +134,17 @@ div#register-background > div{
     background-color: white;
 }
 
-.main-form-centered-box > section > form > div > label{
+.main-form-centered-box > section > form > div{
+    width: 100%;
+    min-height: 40px;
+    text-align: center;
+}
+
+.main-form-centered-box > section > form > section > label{
     padding-left: 4px;
 }
 
-.main-form-centered-box > section > form > div > input{
+.main-form-centered-box > section > form > section > input{
 
     height: 40px;
     width: calc(100% - 30px);
@@ -154,18 +160,19 @@ div#register-background > div{
     
 }
 
-.main-form-centered-box > section > form > button{
+.btn-div{
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.btn-div > button{
+
     margin: 5px 50% 10px;
 
     transform: translate(-50%);
 
-    border: 1px solid rgba(255, 255, 255, 0.644);
-
-    color: var(--secundary-color);
-    background-color: black;
 }
 
-.main-form-centered-box > section > form > button:hover{
+.btn-div > button:hover{
 
     border-radius: 10px;
 
@@ -205,22 +212,59 @@ div#register-background > div{
 /* ACCOUNT */
 
     section#account_user_section{
-        padding: 30px 30px 0px;
+        padding: 20px 10px 0px;
+
+        color: var(--txt-color);
     }
 
-    section#account_user_section > div{
+    section#account_user_flex_section{
         display: flex;
         flex-flow: row;
-
     }
 
     div#account_picture_place{
-        height: 100px;
-        width: 100px;
+        height: 70px;
+        min-width: 70px;
 
-        margin-right: 10px;
+        border-radius: 50%;
 
         background-color: gray;
+    }
+
+    div#account_user_info{
+        display: flex;
+        flex-flow: wrap;
+
+        font-weight: bold;
+    }
+
+    div#account_user_info > div{
+        display: flex;
+        text-align: center;
+        width: 100%;
+    }
+
+    div#account_user_info > div > div{
+        margin: 0px 10px;
+    }
+
+    div#follow_unfollow_div{
+        overflow: hidden;
+        height: 30px;
+    }
+
+    div#account_user_info_numbers span{
+        font-size: .8em;
+        font-weight: normal;
+    }
+
+    section#account_bio{
+        max-width: 500px;
+    }
+
+    section#account_bio > div{
+        margin-bottom: 10px;
+        font-weight: bold;
     }
 
 

@@ -8,31 +8,34 @@
             </header>
             <section>
                 <form action="/account/register" method="post" autocomplete="off">
-                    <div>
+                    <section>
                         <label for="username"><i class="bi bi-person"></i></label>
                         <input type="text" name="username" id="username" placeholder="username (optional)" min="1" max="20" autofocus>
-                    </div>
+                    </section>
 
-                    <div>
+                    <section>
                         <label for="user"><i class="bi bi-person-fill"></i></label>
                         <input type="text" name="user" id="user" placeholder="user" min="5" max="20" required>
-                    </div>
+                    </section>
 
-                    <div>
+                    <section>
                         <label for="email"><i class="bi bi-envelope-fill"></i></label>
                         <input type="email" name="email" id="email" placeholder="email (optional)" min="11" max="320">
-                    </div>
+                    </section>
 
-                    <div>
+                    <section>
                         <label for="password"><i class="bi bi-key-fill"></i></label>
                         <input type="password" name="password" id="password" placeholder="password" min="5" max="30" required>
-                    </div>
+                    </section>
 
-                    <div>
+                    <section>
                         <label for="confirm_password"><i class="bi bi-key"></i></label>
                         <input type="password" name="confirm_password" id="confirm_password" placeholder="confirm-password" min="5" max="30" required>
+                    </section>
+                    <div>
+                        <button class="btn" type="submit">Register</button>
                     </div>
-                    <button class="btn" type="submit">Register</button>
+                    
                 </form>
             </section>
             <hr>

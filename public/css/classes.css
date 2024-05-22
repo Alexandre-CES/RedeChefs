@@ -61,17 +61,23 @@
 /* BUTTON */
 
 .btn{
+    overflow: hidden;
     display: inline-block;
 
-    padding: 5px 5px;
+    padding: 3px 3px;
 
     border-radius: 15% 25%;
-
-    cursor: pointer;
-    transition: ease-in-out .3s;
-
+    border: 1px solid rgba(255, 255, 255, 0.644);
     font: bold 1.1em var(--fontMenu);
+
+    color: var(--secundary-color);
+    background-color: black;
+
+    transition: ease-in-out .3s;
+    cursor: pointer;
 }
+
+
 
 .btn:hover{
     

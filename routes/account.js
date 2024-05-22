@@ -35,26 +35,45 @@ router.get('/', (req,res) =>{
     }
 })
 
-router.get('/user/:user', (req,res) =>{
+router.get('/user/:user', async (req,res) =>{
 
     const requestedUser = req.params.user;
     
     if(req.isAuthenticated()){
         const profile = req.user
 
+        //if user is acessing his own profile
         if(profile.user === requestedUser){
             res.redirect('/account/')
         }else{
-            User.findOne({user:requestedUser}).lean().then((person)=>{
 
-                //const followers_count = Follower.countDocuments({user:person._id})
-                //const following_count = Following.countDocuments({user:person._id})
+            try{
+                
+                const person = await User.findOne({ user:requestedUser }).lean()
+                if (!person) {
+                    res.redirect('/')
+                    return
+                }
 
-                res.render('account/index', {profile:person})
-            }).catch((err)=>{
+                const [followersCount, followingCount] = await Promise.all([
+                    Follower.countDocuments({user:person._id}),
+                    Following.countDocuments({user:person._id})
+                ])
+
+                res.render('account/index', {
+                    profile:person,
+                    followersCount:followersCount,
+                    followingCount:followingCount
+                })
+
+            } catch (err){
+                req.flash('error_msg', 'Error fetching user data')
+                console.log(err)
                 res.redirect('/')
-            })
+            }
         }
+
+    //if user not logged, just show the account
     }else{
         User.findOne({user:requestedUser}).lean().then((person)=>{
             res.render('account/index', {profile:person})

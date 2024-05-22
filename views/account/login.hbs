@@ -14,16 +14,17 @@
             </header>
             <section>
                 <form action="/account/login" method="post" autocomplete="off">
-                    <div>
-                        
+                    <section>
                         <label for="user"><i class="bi bi-person-fill"></i></label>
                         <input type="text" name="user" id="user" placeholder="user" min="5" max="20"  required>
-                    </div>
-                    <div>
+                    </section>
+                    <section>
                         <label for="password"><i class="bi bi-key-fill"></i></label>
                         <input type="password" name="password" id="password" placeholder="password" min="5" max="30" required>
+                    </section>
+                    <div>
+                        <button class="btn" type="submit">Login</button>
                     </div>
-                    <button class="btn" type="submit">Login</button>
                 </form>
             </section>
             <hr>
