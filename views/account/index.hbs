@@ -10,7 +10,7 @@
                 <div>
                     <div>{{profile.user}}</div>
                     <div id="follow_unfollow_div">
-                        <a href="#" class="btn"><i class="bi bi-plus"></i></a>
+                        <a href="#" class="btn btn-small">+</a>
                     </div>
                 </div>
                 <div id="account_user_info_numbers">
@@ -52,12 +52,9 @@
     {{/if}}
 
 <main id="main-without-account" class="main-centered-box main-centered-menu">
-    <nav>
-        <ul>
-            <li><a href="/account/register" class="btn">Register</a></li>
-            <li><a href="/account/login" class="btn">Login</a></li>
-            <li><a href="/account/config" class="btn"><i class="bi bi-gear-fill"></i></a></li>
-        </ul>
-    </nav>
+    <menu>
+        <a href="/account/register" class="btn btn-large">Register</a>
+        <a href="/account/login" class="btn btn-large">Login</a>   
+    </menu>
 </main>
 {{/if}}

@@ -13,7 +13,7 @@ body::-webkit-scrollbar{
     background-color: var(--primary-color);
 }
 
-/* MENU */
+/* TOP AND BOTTOM MENUS */
 .main-menu{
     overflow: hidden;
     position: fixed;
@@ -113,10 +113,6 @@ div#register-background > div{
     border-radius: 50%;
 }
 
-.main-form-centered-header > div i{
-    color: black;
-}
-
 .main-form-centered-box > section{
     padding-top: 80px;
 }
@@ -132,12 +128,6 @@ div#register-background > div{
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.568);
 
     background-color: white;
-}
-
-.main-form-centered-box > section > form > div{
-    width: 100%;
-    min-height: 40px;
-    text-align: center;
 }
 
 .main-form-centered-box > section > form > section > label{
@@ -157,29 +147,13 @@ div#register-background > div{
     border-radius:15px;
 
     font-size: 1.1em;
-    
 }
-
-.btn-div{
-    background-color: rgba(0, 0, 0, 0);
-}
-
-.btn-div > button{
-
-    margin: 5px 50% 10px;
-
-    transform: translate(-50%);
-
-}
-
-.btn-div > button:hover{
-
-    border-radius: 10px;
-
-    border: 1px solid white;
-
-    color: var(--primary-color);
-}
+    /* button */
+    .main-form-centered-box > section > form > div{
+        width: 100%;
+        min-height: 40px;
+        text-align: center;
+    }
 
 .main-form-centered-box hr{
 
@@ -267,22 +241,6 @@ div#register-background > div{
         font-weight: bold;
     }
 
-
-    /* without account */
-    main#main-without-account{
-        width: 230px;
-        height: 250px;
-    }
-    main#main-without-account nav{height: 100%;}
-    main#main-without-account ul{
-        height: 100%;
-        display: flex;
-        flex-flow: column;
-
-        justify-content: space-between;
-    }
-    
-
 /* NEW RECIPE */
 
 main#main-new-recipe-box{
@@ -316,6 +274,3 @@ main#main-new-recipe-box form > div textarea{
         height: 250px;
     }
 
-    a#admin-main-centered-box-ul-li-a-1{top: 20%;}
-    a#admin-main-centered-box-ul-li-a-2{top: 50%;}
-    a#admin-main-centered-box-ul-li-a-3{top: 80%;}
