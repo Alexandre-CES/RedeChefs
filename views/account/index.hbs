@@ -8,10 +8,18 @@
             </div>
             <div id="account_user_info">
                 <div>
-                    <div>{{profile.user}}</div>
-                    <div id="follow_unfollow_div">
+                    <div>{{profile.username}}</div>
+                    {{#if followButton}}
+                    <div id="account_user_follow_unfollow_config_div">
                         <a href="#" class="btn btn-small">+</a>
                     </div>
+                    {{else}}
+                    <div id="account_user_follow_unfollow_config_div">
+                        <a href="" class="btn btn-small"><i class="bi bi-gear"></i></a>
+                    </div>
+
+                    {{/if}}
+                    
                 </div>
                 <div id="account_user_info_numbers">
                     <div>
@@ -30,9 +38,6 @@
             </div>
         </section>
         <section id="account_bio">
-            <div>
-                {{profile.username}}
-            </div>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa repellendus ut aliquam nam iure perspiciatis exercitationem debitis tenetur velit natus impedit, facere unde, est quas sunt! Repudiandae aspernatur quos dolorem.
         </section>
     </section>

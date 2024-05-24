@@ -29,7 +29,7 @@ router.get('/', (req,res) =>{
     
     if(req.isAuthenticated()){
         const profile = req.user
-        res.render('account/index', {profile:profile})
+        res.render('account/index', {profile:profile, followButton:false})
     }else{
         res.render('account/index')
     }
@@ -63,7 +63,8 @@ router.get('/user/:user', async (req,res) =>{
                 res.render('account/index', {
                     profile:person,
                     followersCount:followersCount,
-                    followingCount:followingCount
+                    followingCount:followingCount,
+                    followButton:true
                 })
 
             } catch (err){

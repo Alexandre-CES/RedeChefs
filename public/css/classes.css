@@ -23,10 +23,7 @@
         height: 150px;
         padding: 20px 0px;
 
-        text-align: center;
-
         background-color: black;
-        font-family: var(--fontMenu);
         font-size: 2em;
     }
 
@@ -38,16 +35,6 @@
         flex-flow: column;
         align-items: center;
         justify-content: space-between;
-    }
-
-    .main-centered-menu a{
-        text-decoration: none;
-
-        color: var(--secundary-color);
-    }
-
-    .main-centered-menu a:hover{
-        color: var(--primary-color);
     }
 
 /* BACKGROUND */
@@ -100,7 +87,7 @@
     font-size: 1.2em;
 
     text-shadow: 1px rgba(0, 0, 0, 0.589);
-    
+    color: var(--primary-color);
 }
 
 /* MESSAGE */

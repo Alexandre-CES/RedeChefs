@@ -186,7 +186,7 @@ div#register-background > div{
 /* ACCOUNT */
 
     section#account_user_section{
-        padding: 20px 10px 0px;
+        padding: 10px 0px;
 
         color: var(--txt-color);
     }
@@ -219,26 +219,22 @@ div#register-background > div{
     }
 
     div#account_user_info > div > div{
-        margin: 0px 10px;
+        margin: 0px 5px;
     }
 
-    div#follow_unfollow_div{
+    div#account_user_follow_unfollow_config_div{
         overflow: hidden;
         height: 30px;
     }
 
     div#account_user_info_numbers span{
-        font-size: .8em;
+        font-size: .7em;
         font-weight: normal;
     }
 
     section#account_bio{
         max-width: 500px;
-    }
-
-    section#account_bio > div{
-        margin-bottom: 10px;
-        font-weight: bold;
+        margin-top: 30px;
     }
 
 /* NEW RECIPE */
