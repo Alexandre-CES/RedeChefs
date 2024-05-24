@@ -75,7 +75,7 @@ body{
 }
 
 main{
-    margin-top: 40px; /* So top menu don't hidde content */
+    margin: 40px 0px 35px; /* So top menu don't hidde content */
 
     padding: 10px; /* at this point i didn't saw pages needing more or less of it */
 }

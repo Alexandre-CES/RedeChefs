@@ -2,47 +2,54 @@
 
 <main>
     <section id="account_user_section">
-        <section id="account_user_flex_section">
+        <section id="account_user_display">
             <div id="account_picture_place">
 
             </div>
-            <div id="account_user_info">
-                <div>
-                    <div>{{profile.username}}</div>
-                    {{#if followButton}}
-                    <div id="account_user_follow_unfollow_config_div">
-                        <a href="#" class="btn btn-small">+</a>
-                    </div>
-                    {{else}}
-                    <div id="account_user_follow_unfollow_config_div">
-                        <a href="" class="btn btn-small"><i class="bi bi-gear"></i></a>
-                    </div>
+            <div>{{profile.username}}</div>
 
-                    {{/if}}
-                    
-                </div>
-                <div id="account_user_info_numbers">
-                    <div>
-                        <div>123</div>
-                        <span>followers</span>
-                    </div>
-                    <div>
-                        <div>123</div>
-                        <span>following</span>
-                    </div>
-                    <div>
-                        <div>123</div>
-                        <span>posts</span>
-                    </div>
-                </div>
+        </section>
+        <section id="account_user_info_numbers">
+            <div>
+                <div>123</div>
+                <span>followers</span>
             </div>
+            <div>
+                <div>123</div>
+                <span>following</span>
+            </div>
+            <div>
+                <div>123</div>
+                <span>recipes</span>
+            </div>
+        </section>
+        <section id="account_user_interact_buttons">
+            {{#if followButton}}
+                <div>
+                    <a href="#" class="btn btn-small btn-colors">seguir</a>
+                </div>
+                <div>
+                    <a href="#" class="btn btn-small btn-danger">denunciar</a>
+                </div>
+            {{else}}
+                <div>
+                    <a href="" class="btn btn-large btn-colors">Configurar perfil</a>
+                </div>
+            {{/if}}
         </section>
         <section id="account_bio">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa repellendus ut aliquam nam iure perspiciatis exercitationem debitis tenetur velit natus impedit, facere unde, est quas sunt! Repudiandae aspernatur quos dolorem.
         </section>
     </section>
     <section id="account_posts">
-
+        {{#each posts}}
+            <div></div>
+        {{/each}}
+        <div>Teste</div>
+        <div>Teste</div>
+        <div>Teste</div>
+        <div>Teste</div>
+        
     </section>
 </main>
 
