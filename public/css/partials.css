@@ -232,13 +232,14 @@ div#register-background > div{
     }
 
     section#account_user_interact_buttons{
-        height: 39px;
+        height: 40px;
         display: flex;
         flex-direction: row;
         justify-content: center;
     }
 
     section#account_user_interact_buttons > div{
+        overflow: hidden;
         margin-left: 10px;
     }
 
@@ -291,8 +292,17 @@ main#main-new-recipe-box form > div textarea{
 
     /* INDEX */
 
+    header#admin-header-box{
+        margin-top: 100px;
+        text-align: center;
+    }
+
     main#admin-main-centered-box{
         width: 230px;
         height: 250px;
     }
 
+
+/* ERROR */
+    /* INDEX */
+    

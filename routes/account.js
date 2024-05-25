@@ -107,13 +107,13 @@ router.all('/register', async (req, res) => {
         }
 
         if (errors.length > 0) {
-            res.render('account/register', { hide_menu: true, errors: errors })
+            res.render('account/register', { hide_menus: true, errors: errors })
         } else {
             try {
                 const existingUser = await User.findOne({ user: user })
                 if (existingUser) {
                     errors.push('User already exists!')
-                    res.render('account/register', { hide_menu: true, errors: errors })
+                    res.render('account/register', { hide_menus: true, errors: errors })
                     return
                 }
 
@@ -121,7 +121,7 @@ router.all('/register', async (req, res) => {
                     const existingEmailUser = await User.findOne({ email: email })
                     if (existingEmailUser) {
                         errors.push('Email already being used!')
-                        res.render('account/register', { hide_menu: true, errors: errors })
+                        res.render('account/register', { hide_menus: true, errors: errors })
                         return
                     }
                 }
@@ -155,7 +155,7 @@ router.all('/register', async (req, res) => {
             }
         }
     } else {
-        res.render('account/register', { hide_menu: true })
+        res.render('account/register', { hide_menus: true })
     }
 })
 
@@ -168,7 +168,7 @@ router.all('/login', (req, res, next)=>{
             failureFlash: true,
         })(req,res,next)
     }else{
-        res.render('account/login', {hide_menu:true, message: req.flash('error')})
+        res.render('account/login', {hide_menus:true, message: req.flash('error')})
     }
 })
 

@@ -1,0 +1,15 @@
+<header id="errors_page_header">
+    <h1>{{errorCode}}</h1>
+</header>
+<main id="errors_page_main">
+    <div>
+        <img src="/img/sad-sad-cat.gif" alt="Sad Cat">
+    </div>
+</main>
+<footer id="errors_page_footer">
+    {{#if errorMessage}}
+    <p>{{errorMessage}}</p>
+    {{else}}
+    <p>something went wrong</p>
+    {{/if}}
+</footer>

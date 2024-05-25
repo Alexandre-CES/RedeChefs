@@ -14,6 +14,7 @@
         const admin = require('./routes/admin')
         const account = require('./routes/account')
         const posts = require('./routes/posts')
+        const errors = require('./routes/errors')
 
 //Configs
     //Session
@@ -25,8 +26,8 @@
 
         app.use(passport.initialize())
         app.use(passport.session())
-
         app.use(flash())
+
     //Middleware
 
         //bodyparser
@@ -44,6 +45,7 @@
 
             res.locals.success_msg = req.flash('success_msg')
             res.locals.error_msg = req.flash('error_msg')
+            res.locals.error_code = req.flash('error_code')
             next()
         })
         
@@ -69,9 +71,25 @@
     app.use('/admin', admin)
     app.use('/account', account)
     app.use('/posts', posts)
+    app.use('/errors', errors)
 
-app.get('/', (req,res)=>{
-    res.render('index')
+app.get('/', (req,res, next)=>{
+    try{
+        res.render('index')
+    }catch(err){
+        next(err)
+    }
+    
+})
+
+//middleware for errors
+app.use((err, req, res, next) => {
+    console.error(err.stack)
+    if (!res.headersSent) {
+        req.flash('error_msg', `${err.message}`)
+        req.flash('error_code', `${err.status || 500}`)
+        res.status(err.status || 500).redirect('/errors')
+    }
 })
 
 //App starting
