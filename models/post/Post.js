@@ -33,6 +33,9 @@ const Post = new Schema({
     creationDate:{
         type: Date,
         default: Date.now()
+    },
+    imagePath:{
+        type:String
     }
 })
 

@@ -1,5 +1,10 @@
 <header id="errors_page_header">
+    {{#if errorCode}}
     <h1>{{errorCode}}</h1>
+    {{else}}
+    <h1>Error</h1>
+    {{/if}}
+    
 </header>
 <main id="errors_page_main">
     <div>

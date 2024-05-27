@@ -6,9 +6,9 @@
     const mongoose = require('mongoose') 
     const flash = require('connect-flash')
     const path = require('path')
-
     const session = require('express-session')
     const passport = require('passport')
+    const multer = require('multer')
 
     //rotas
         const admin = require('./routes/admin')
@@ -17,6 +17,18 @@
         const errors = require('./routes/errors')
 
 //Configs
+
+    //Multer
+    const storage = multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, 'uploads/')
+        },
+        filename: (req, file, cb) => {
+            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+        }
+    })
+    const upload = multer({ storage: storage })
+
     //Session
         app.use(session({
             secret: 'SegredoSecreto',
@@ -40,6 +52,12 @@
             next()
         })
 
+        //multer
+        app.use((req, res, next) => {
+            req.upload = upload
+            next()
+        })
+
         //flash
         app.use((req,res,next)=>{
 
@@ -51,6 +69,7 @@
         
         //Static
         app.use(express.static(path.join(__dirname, 'public')))
+        app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
     //Handlebars
         app.engine('hbs', hbs.engine({
@@ -65,7 +84,9 @@
             console.log('Mongo connected')
         }).catch((err)=>{
             console.log(`Couldn't connect database: ${err}`)
-        })  
+        }) 
+    
+    
 
 //Routes
     app.use('/admin', admin)

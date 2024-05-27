@@ -305,4 +305,16 @@ main#main-new-recipe-box form > div textarea{
 
 /* ERROR */
     /* INDEX */
-    
+    header#errors_page_header{
+        text-align: center;
+        padding-top: 20px;
+        font:bold 2em var(--fontTitle);
+    }
+    main#errors_page_main{
+        margin: 0px auto;
+        text-align: center;
+    }
+    footer#errors_page_footer{
+        text-align: center;
+        font: bold 1.3em var(--fontText);
+    }

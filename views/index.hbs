@@ -1,8 +1,12 @@
 <main>
 {{#each posts}}
     <article>
-        <h1>{{posts.title}}</h1>
-        <p>{{posts.description}}</p>
+        <a href="#">
+            {{#if}}
+            <img src="" alt="">
+            {{/if}}
+            <h1>{{this.title}}</h1>
+        </a>
     </article>
 {{/each}}
 </main>
