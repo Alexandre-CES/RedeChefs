@@ -1,10 +1,12 @@
 <main>
 {{#each posts}}
-    <article>
+    <article id="mainPage_article_post">
         <a href="#">
-            {{#if}}
-            <img src="" alt="">
-            {{/if}}
+            <div>
+                {{#if this.imagePath}}
+                <img src="/{{this.imagePath}}" alt="{{this.title}}">
+                {{/if}}
+            </div>
             <h1>{{this.title}}</h1>
         </a>
     </article>

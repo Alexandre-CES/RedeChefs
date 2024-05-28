@@ -3,7 +3,6 @@
     const app = express()
 
     const hbs = require('express-handlebars')
-    const mongoose = require('mongoose') 
     const flash = require('connect-flash')
     const path = require('path')
     const session = require('express-session')
@@ -16,6 +15,13 @@
         const posts = require('./routes/posts')
         const errors = require('./routes/errors')
 
+    //mongoose
+        const mongoose = require('mongoose')
+        require('./models/post/Post')
+        require('./models/post/Category')
+        const Post = mongoose.model('posts')
+        const Category = mongoose.model('categories')
+
 //Configs
 
     //Multer
@@ -27,7 +33,18 @@
             cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
         }
     })
-    const upload = multer({ storage: storage })
+    const fileFilter = (req, file, cb) => {
+        const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg']
+        if (allowedMimeTypes.includes(file.mimetype)) {
+            cb(null, true)
+        } else {
+            cb(new Error('Invalid file type. Only JPEG, PNG, and JPG are allowed.'), false)
+        }
+    }
+    const upload = multer({ 
+        storage: storage,
+        fileFilter: fileFilter
+    })
 
     //Session
         app.use(session({
@@ -94,9 +111,10 @@
     app.use('/posts', posts)
     app.use('/errors', errors)
 
-app.get('/', (req,res, next)=>{
+app.get('/', async (req,res, next)=>{
     try{
-        res.render('index')
+        var postsData = await Post.find({}).lean()
+        res.render('index', {posts:postsData})
     }catch(err){
         next(err)
     }

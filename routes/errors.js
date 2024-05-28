@@ -5,9 +5,10 @@ router.get('/', (req, res) => {
     const errorMessage = req.flash('error_msg')
     let errorCode = req.flash('error_code')
     
-    res.render('errors/index', { errorMessage: errorMessage[0] || 'Something went wrong',
-     hide_top_menu:true,
-     errorCode: errorCode[0] || 500
+    res.render('errors/index', { 
+        errorCode: errorCode[0] || 500,
+        errorMessage: errorMessage[0] || 'Something went wrong',
+        hide_top_menu:true
     })
 })
 

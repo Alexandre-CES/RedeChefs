@@ -74,6 +74,20 @@ menu#main-bottom-menu > nav > ul > li a{
     color: var(--txt-color);
 }
 
+/* HOMEPAGE */
+
+article#mainPage_article_post{
+    max-width: 100%;
+}
+
+article#mainPage_article_post a div{
+    
+}
+
+article#mainPage_article_post img{
+    max-width: 100%;
+}
+
 /* REGISTER/LOGIN */
 
 div#register-background{
