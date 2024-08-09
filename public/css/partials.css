@@ -85,7 +85,7 @@ article#mainPage_article_post a div{
 }
 
 article#mainPage_article_post img{
-    max-width: 100%;
+    width: 100px;
 }
 
 /* REGISTER/LOGIN */
