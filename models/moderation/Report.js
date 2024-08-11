@@ -17,9 +17,18 @@ const Report = new Schema({
         ref: 'users',
         required: true
     },
-    reason: {
-        type: String,
+    reason:{
+        type:String,
+        enum:[
+            'harassment',
+            'violence',
+            'inappropriate content',
+            'bullying'
+        ],
         required: true
+    },
+    comment: {
+        type: String,
     },
     createdAt: {
         type: Date,

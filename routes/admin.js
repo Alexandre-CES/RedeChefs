@@ -4,8 +4,10 @@ const mongoose = require('mongoose')
 
 require('../models/user/Status')
 require('../models/post/Category')
+require('../models/moderation/Report')
 const Status = mongoose.model('status')
 const Category = mongoose.model('categories')
+const Report = moongose.model('reports')
 
 router.get('/', async (req,res)=>{
     if(req.isAuthenticated()){
@@ -25,12 +27,9 @@ router.get('/', async (req,res)=>{
     }
 })
 
-router.all('/reports', async (req,res) =>{
-    if(req.method == 'POST'){
-
-    }else{
-        res.render('admin/reports')
-    }
+router.get('/reports', async (req,res) =>{
+    const reports = await  Report.find({status:'pending'}).lean()
+    res.render('admin/reports/index', {reports:reports})
 })
 
 router.get('/create', async (req,res)=>{
