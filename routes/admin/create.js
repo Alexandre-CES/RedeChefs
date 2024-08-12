@@ -2,37 +2,12 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 
-require('../models/user/Status')
-require('../models/post/Category')
-require('../models/moderation/Report')
+require('../../models/user/Status')
+require('../../models/post/Category')
 const Status = mongoose.model('status')
 const Category = mongoose.model('categories')
-const Report = moongose.model('reports')
 
 router.get('/', async (req,res)=>{
-    if(req.isAuthenticated()){
-
-        userId = req.user._id
-
-        const userStatus = await Status.findOne({user:userId})
-
-        if(userStatus.admin == true){
-            res.render('admin/index')
-        }else{
-            res.redirect('/')
-        }
-        
-    }else{
-        res.redirect('/')
-    }
-})
-
-router.get('/reports', async (req,res) =>{
-    const reports = await  Report.find({status:'pending'}).lean()
-    res.render('admin/reports/index', {reports:reports})
-})
-
-router.get('/create', async (req,res)=>{
     if(req.isAuthenticated()){
 
         userId = req.user._id
@@ -50,7 +25,7 @@ router.get('/create', async (req,res)=>{
     }
 })
 
-router.post('/create/category', async (req,res)=>{
+router.post('/category', async (req,res)=>{
 
     const inputCategory = req.body.inputCategory
 

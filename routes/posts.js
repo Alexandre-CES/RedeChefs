@@ -7,6 +7,8 @@ require('../models/post/Category')
 const Post = mongoose.model('posts')
 const Category = mongoose.model('categories')
 
+const { validate } = require('../helpers/validateReqBody')
+
 router.get('/post/:id', (req,res)=>{
     res.render('posts/index')
 })
@@ -22,77 +24,55 @@ router.all('/new', async (req,res)=>{
                     res.redirect('/errors/')
                 }
 
-                let errors = []
-
-                const title = req.body.title
-                const ingredients = req.body.ingredients
-                const method = req.body.method
-                const description = req.body.description
-                const diet = req.body.diet
-                const mealTimes = req.body.mealTimes
-
-                if(
-                    !title || title == undefined || title == null 
-                    || title.length < 1 || title.length > 20
-                ){
-                    errors.push('Invalid title')
-                }else if(
-                    !ingredients || ingredients == undefined || ingredients == null 
-                    || ingredients.length < 1 || ingredients.length > 1000
-                ){
-                    errors.push('Invalid ingredient field')
-                }else if(
-                    !method || method == undefined || method == null 
-                    || method.length < 5 || method.length > 5000
-                ){
-                    errors.push('Invalid method field')
-                } else if(description.length > 1000){
-
-                    errors.push('Invalid description')
-                }else if(
-                    !diet || diet == undefined || diet == null ||
-                    !mealTimes || mealTimes == undefined || mealTimes == null 
-                ){
-                    errors.push('Invalid additionals')
+                const rules = {
+                    title: { required: true, minLength: 1, maxLength: 20 },
+                    ingredients: { required: true, minLength: 1, maxLength: 1000 },
+                    method: { required: true, minLength: 5, maxLength: 5000 },
+                    description: { maxLength: 1000 },
+                    diet: { required: true },
+                    mealTimes: { required: true }
                 }
+
+                const errors = validate(req.body, rules)
                     
                 if(errors.length > 0){
                     console.log(errors)
+                    req.flash('error_msg', errors.join(', '))
                     res.redirect('/posts/new')
                 }else{
 
                     try{
                         const user = req.user._id
 
-                        var splitIngredients = ingredients.split(',')
+                        var splitIngredients = req.body.ingredients.split(',')
                         var splitIngredients = splitIngredients.map(ingredient => ingredient.trim())
 
                         const postData = {
                             user: user,
-                            title: title,
-                            ingredients: splitIngredients,
-                            method: method,
+                            title: req.body.title,
+                            ingredients: req.body.splitIngredients,
+                            method: req.body.method,
                         }
 
+                        //optional values
                         if(description){
-                            postData.description = description
+                            postData.description = req.body.description
                         }
-
                         if (req.file) {
                             postData.imagePath = req.file.path;
                         }
 
                         let categories = []
 
-                        if(diet != 'none'){
-                            var dietType = await Category.findOne({category:diet})
+                        if(req.body.diet != 'none'){
+                            var dietType = await Category.findOne({category:req.body.diet})
 
                             if (dietType){
                                 categories.push(dietType._id)
                             }
                         }       
-                        if(mealTimes != 'none'){
-                            var dietType = await Category.findOne({category:mealTimes})
+                        if(req.body.mealTimes != 'none'){
+                            var dietType = await Category.findOne({category:req.body.mealTimes})
 
                             if (dietType){
                                 categories.push(dietType._id)
@@ -110,8 +90,6 @@ router.all('/new', async (req,res)=>{
                             console.log('Error crating post: '+err)
                             res.redirect('/posts/new')
                         })
-
-                        
 
                     }catch(err){
                         req.flash('error_msg', 'Error creating post: '+err)

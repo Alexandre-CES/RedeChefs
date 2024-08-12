@@ -10,7 +10,7 @@
     const multer = require('multer')
 
     //rotas
-        const admin = require('./routes/admin')
+        const admin = require('./routes/admin/admin')
         const account = require('./routes/account')
         const posts = require('./routes/posts')
         const errors = require('./routes/errors')
@@ -103,8 +103,6 @@
             console.log(`Couldn't connect database: ${err}`)
         }) 
     
-    
-
 //Routes
     app.use('/admin', admin)
     app.use('/account', account)
