@@ -302,6 +302,25 @@ main#main-new-recipe-box form > div textarea{
     max-width: 100%;
 }
 
+/* POST */
+
+main#post_main_box > h1,h2{
+    text-align: center;
+
+    margin: 0.5em 0px;
+}
+
+div#post_image_box{
+    margin: auto;
+    max-width: 80%;
+
+    border: 1px solid var(--primary-color);
+}
+
+div#post_image_box > img{
+    max-width: 100%;
+}
+
 /* ADMIN */
 
     /* INDEX */

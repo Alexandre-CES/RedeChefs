@@ -9,8 +9,12 @@ const Category = mongoose.model('categories')
 
 const { validate } = require('../helpers/validateReqBody')
 
-router.get('/post/:id', (req,res)=>{
-    res.render('posts/index')
+router.get('/post/:id', async (req,res)=>{
+    
+    const id = req.params.id
+    const post = await Post.findOne({_id:id}).lean()
+
+    res.render('posts/index', {post:post})
 })
 
 router.all('/new', async (req,res)=>{
@@ -99,7 +103,12 @@ router.all('/new', async (req,res)=>{
             })
         }else{
             let optdiet = ['Vegan', 'Vegetarian']
-            let optMealTimes = ['Breakfast', 'Lunch', 'Snack', 'Dinner']
+            let optMealTimes = [
+                'Breakfast',
+                'Lunch',
+                'Snack',
+                'Dinner'
+            ]
             res.render('posts/new', {optdiet:optdiet, optMealTimes:optMealTimes})
         }
     }else{

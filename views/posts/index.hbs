@@ -1,14 +1,16 @@
-<main>
+<main id="post_main_box">
     {{#if post}}
-        <h1>{{this.title}}</h1>
+        <h1>{{post.title}}</h1>
 
-        {{#if this.imagePath}}
-            <img src="/{{this.imagePath}}" alt="">
+        {{#if post.imagePath}}
+        <div id="post_image_box">
+            <img src="/{{post.imagePath}}" alt="">
+        </div>
         {{/if}}
 
         <h2>Ingredients</h2>
         <ul>
-            {{#each this.ingredients}}
+            {{#each post.ingredients}}
                 <li>{{this}}</li>               
             {{/each}}
         </ul>
