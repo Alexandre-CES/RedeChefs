@@ -102,9 +102,11 @@ router.all('/register', async (req, res) => {
             res.render('account/register', { hide_menus: true, errors: errors, message: req.flash('error_msg') })
         } else {
 
+            //username = user if you leave the field blank
             let username = req.body.username || req.body.user
 
             try {
+                //check if user already exist
                 const existingUser = await User.findOne({ user: req.body.user })
                 if (existingUser) {
                     errors.push('User already exists!')
@@ -116,15 +118,17 @@ router.all('/register', async (req, res) => {
                     return
                 }
 
+                //check if email already exist
                 if (req.body.email) {
-                    const existingEmailUser = await User.findOne({ email: req.body.email })
-                    if (existingEmailUser) {
+                    const existingEmail = await User.findOne({ email: req.body.email })
+                    if (existingEmail) {
                         errors.push('Email already being used!')
                         res.render('account/register', { hide_menus: true, errors: errors })
                         return
                     }
                 }
 
+                //encrypting password
                 let salt = bcrypt.genSaltSync(10)
                 let hash = bcrypt.hashSync(req.body.password, salt)
 

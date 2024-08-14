@@ -1,4 +1,8 @@
-// Session and authentication
+/*
+    *Session and authentication
+
+    TODO: Not letting banned users to actually log in their account
+*/
 
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
@@ -9,23 +13,20 @@ require('../models/user/Status')
 const User = mongoose.model('users')
 const Status = mongoose.model('status')
 
+const { validate } = require('../helpers/validateReqBody')
+
 module.exports = (passport) =>{
     passport.use(new LocalStrategy({
         usernameField:'user', 
         passwordField:'password'
     },(user, password, done) =>{
-        let errors = []
 
-        if(
-            !user || user == undefined || user == null 
-            || user.length < 5 || user.length > 20 ||
-
-            !password || password == undefined || password == null 
-            || password.length < 5 || password.length > 30 
-
-        ){
-            errors.push('Invalid fields')
+        //validate form
+        const rules ={
+            user: {required:true, minLength:5, maxLength:20},
+            password:{required:true, minLength:5, maxLength:30}
         }
+        const errors = validate({user,password}, rules)
 
         if(errors.length > 0){
             return done(null, false, { message: 'Invalid fields' })

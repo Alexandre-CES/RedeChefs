@@ -1,3 +1,6 @@
+/*
+    Model for admins
+*/
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 

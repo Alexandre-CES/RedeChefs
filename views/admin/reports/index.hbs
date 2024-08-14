@@ -1,8 +1,15 @@
+<!--
+    This page shows every report that are not solved 
+-->
 <main>
     {{#each reports}}
         <div>
             <h2>{{reason}}</h2>
             <small>{{targetType}}</small>
+
+            <!--
+                hyperlink with report to his page, accessed by id
+            -->
             <a href="/admin/reports/report/{{_id}}"></a>
         </div>
     {{/each}}

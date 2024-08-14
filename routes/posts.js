@@ -28,6 +28,7 @@ router.all('/new', async (req,res)=>{
                     res.redirect('/errors/')
                 }
 
+                //validate form
                 const rules = {
                     title: { required: true, minLength: 1, maxLength: 20 },
                     ingredients: { required: true, minLength: 1, maxLength: 1000 },
@@ -36,9 +37,7 @@ router.all('/new', async (req,res)=>{
                     diet: { required: true },
                     mealTimes: { required: true }
                 }
-
-                const errors = validate(req.body, rules)
-                    
+                const errors = validate(req.body, rules)   
                 if(errors.length > 0){
                     console.log(errors)
                     req.flash('error_msg', errors.join(', '))
