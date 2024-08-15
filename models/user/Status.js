@@ -16,10 +16,6 @@ const Status = new Schema({
         type: Boolean,
         default: false
     },
-    admin:{
-        type: Boolean,
-        default: false
-    },
     warningCount:{
         type: Number,
         default: 0

@@ -1,17 +1,15 @@
 /*
-    *admin's module
+    *crud's module
 */
 const express = require('express')
 const router = express.Router()
 
 // Importing sub-routes
-const crudRoute = require('./crud/crud')
-const reportRoute = require('./reports')
+const categoryRoute = require('./category')
 const indexRoute = require('./index')
 
 // Using sub-routes
-router.use('/crud', crudRoute)
-router.use('/reports', reportRoute)
+router.use('/category', categoryRoute)
 router.use('/', indexRoute)
 
 module.exports = router

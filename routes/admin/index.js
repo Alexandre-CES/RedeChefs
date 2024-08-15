@@ -2,17 +2,17 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 
-require('../../models/user/Status')
-const Status = mongoose.model('status')
+require('../../models/moderation/Admin')
+const Admin = mongoose.model('admins')
 
 router.get('/', async (req,res)=>{
     if(req.isAuthenticated()){
 
         userId = req.user._id
 
-        const userStatus = await Status.findOne({user:userId})
-
-        if(userStatus.admin == true){
+        //checks if user is admin
+        const adminUser = await Admin.findOne({user:userId})
+        if(adminUser){
             res.render('admin/index')
         }else{
             res.redirect('/')

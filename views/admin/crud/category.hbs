@@ -1,0 +1,31 @@
+<!--
+    form to modify categories
+-->
+<main class="crud_main_box">
+    <h1>Categories</h1>
+    <h2>Create category</h2>
+    <form action="/admin/crud/category/create" method="post" autocomplete="off">
+        <div>
+            <input type="text" name="inputCategory" id="inputCategory" autofocus>
+            <button type="submit">Create</button>
+        </div>
+    </form>
+
+    <h2>List of categories</h2>
+    <ul class="crud_read_list_box">
+    {{#each categories}}
+        <li>
+            <div>
+                <div>{{category}}</div>
+                <div>
+                    <a class="btn btn-small btn-caution" href="/admin/crud/category/update/{{_id}}"><i class="bi bi-pencil"></i></a>
+                    <form action="/admin/crud/category/delete" method="post">
+                        <input type="hidden" id="categoryId" name="categoryId" value="{{_id}}">
+                        <button class="btn btn-small btn-danger" href="#"><i class="bi bi-trash"></i></button>
+                    </form>
+                </div>
+            </div>
+        </li>
+    {{/each}}
+    </ul>
+</main>

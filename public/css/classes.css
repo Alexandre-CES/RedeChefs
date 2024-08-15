@@ -74,6 +74,11 @@
     background-color: black;
 }
 
+.btn-caution{
+    color: white;
+    background-color: rgb(255, 224, 84);
+}
+
 .btn-danger{
     color: rgb(230, 230, 230);
     background-color: rgb(255, 82, 82);

@@ -304,7 +304,7 @@ main#main-new-recipe-box form > div textarea{
 
 /* POST */
 
-main#post_main_box > h1,h2{
+main#post_main_box > h1, main#post_main_box > h2{
     text-align: center;
 
     margin: 0.5em 0px;
@@ -335,6 +335,45 @@ div#post_image_box > img{
         height: 250px;
     }
 
+    /* CRUD */
+
+    .crud_main_box{
+        text-align: center; 
+    }
+
+    .crud_main_box h2{
+        margin: 20px 0px;
+    }
+
+    .crud_main_box > form > div{
+        display: flex;
+        justify-content: center;
+    }
+
+    .crud_read_list_box > li{
+        margin: 0px 10px;
+        height: 50px;
+    }
+
+    .crud_read_list_box > li > div{
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+    }
+
+    .crud_read_list_box  div > div{
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+    }
+
+    .crud_read_list_box  div > div > a{
+        height: 28px;
+    }
+
+    .crud_read_list_box  div > div > a:hover{
+        height: 32px;
+    }
 
 /* ERROR */
     /* INDEX */

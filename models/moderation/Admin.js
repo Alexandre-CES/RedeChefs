@@ -13,10 +13,13 @@ const Admin = new Schema({
     },
     type:{
         type: String,
-        enum: ['owner', 'staff'],
+        enum: [
+            'owner',
+            'staff'
+        ],
         required: true
     },
-    Date:{
+    date:{
         type: Date,
         default: Date.now()
     }
