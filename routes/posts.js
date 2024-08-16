@@ -58,7 +58,7 @@ router.all('/new', async (req,res)=>{
                         }
 
                         //optional values
-                        if(description){
+                        if(req.body.description){
                             postData.description = req.body.description
                         }
                         if (req.file) {

@@ -321,6 +321,19 @@ div#post_image_box > img{
     max-width: 100%;
 }
 
+main#post_main_box ul{
+    list-style-type: square;
+    list-style-position: inside;
+
+    font: normal 1.3em var(--fontText);
+
+    margin: 20px;
+}
+
+main#post_main_box p{
+    font: normal 1em var(--fontText);
+}
+
 /* ADMIN */
 
     /* INDEX */

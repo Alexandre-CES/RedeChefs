@@ -4,6 +4,10 @@
 const express = require('express')
 const router = express.Router()
 
+const isAdmin = require('./middlewares/isAdmin')
+
+router.use(isAdmin)
+
 // Importing sub-routes
 const crudRoute = require('./crud/crud')
 const reportRoute = require('./reports')

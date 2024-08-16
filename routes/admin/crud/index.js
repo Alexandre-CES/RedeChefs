@@ -13,25 +13,18 @@ require('../../../models/post/Category')
 const Admin = mongoose.model('admins')
 
 router.get('/', async (req,res)=>{
-    if(req.isAuthenticated()){
 
-        userId = req.user._id
+    const userId = req.user._id
+    const adminUser = await Admin.findOne({user:userId})
 
-        //checks if user is admin
-        const adminUser = await Admin.findOne({user:userId})
-        if(adminUser){
-            let isOwner = false
-            if(adminUser.type == 'owner'){
-                isOwner = true
-            }
-            res.render('admin/crud/index', {isOwner:isOwner})
-        }else{
-            res.redirect('/')
-        }
-        
-    }else{
-        res.redirect('/')
+    //check if user has permission
+    let isOwner = false
+    if(adminUser.type == 'owner'){
+        isOwner = true
     }
+
+    res.render('admin/crud/index', {isOwner:isOwner})
+  
 })
 
 module.exports = router

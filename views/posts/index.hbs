@@ -8,12 +8,16 @@
         </div>
         {{/if}}
 
-        <h2>Ingredients</h2>
+        <h2>Ingredientes</h2>
         <ul>
             {{#each post.ingredients}}
                 <li>{{this}}</li>               
             {{/each}}
         </ul>
+
+        <h2>Método de preparo</h2>
+
+        <p>{{post.method}}</p>
     {{else}}
 
         <h1>Error</h1>
