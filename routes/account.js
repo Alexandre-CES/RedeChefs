@@ -84,10 +84,14 @@ router.get('/user/:user', async (req,res) =>{
 router.all('/register', async (req, res) => {
     if (req.method == 'POST') {
 
-        const rules = {
+        let rules = {
             user:{required:true, minLength:5, maxLength:20},
             password:{required:true, minLength:5, maxLength:30},
             confirm_password:{required:true, minLength:5, maxLength:30}
+        }
+
+        if(req.body.email){
+            rules.email = { regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ }
         }
 
         const errors = validate(req.body, rules)
@@ -118,6 +122,16 @@ router.all('/register', async (req, res) => {
                     return
                 }
 
+                //encrypting password
+                let salt = bcrypt.genSaltSync(10)
+                let hash = bcrypt.hashSync(req.body.password, salt)
+
+                let userData = {
+                    username: username,
+                    user: req.body.user,
+                    password: hash,
+                }
+
                 //check if email already exist
                 if (req.body.email) {
                     const existingEmail = await User.findOne({ email: req.body.email })
@@ -125,18 +139,9 @@ router.all('/register', async (req, res) => {
                         errors.push('Email already being used!')
                         res.render('account/register', { hide_menus: true, errors: errors })
                         return
+                    }else{
+                        userData.email = req.body.email
                     }
-                }
-
-                //encrypting password
-                let salt = bcrypt.genSaltSync(10)
-                let hash = bcrypt.hashSync(req.body.password, salt)
-
-                const userData = {
-                    username: username,
-                    user: req.body.user,
-                    password: hash,
-                    email: req.body.email || null
                 }
 
                 const savedUser = await new User(userData).save()
