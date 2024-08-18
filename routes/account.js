@@ -15,17 +15,30 @@
     require ('../models/user/Status')
     require('../models/user/Follower')
     require('../models/user/Following')
+    require('../models/post/Post')
     const User = mongoose.model('users')
     const Status = mongoose.model('status')
     const Follower = mongoose.model('followers')
     const Following = mongoose.model('following')
+    const Post = mongoose.model('posts')
 
 //Rotas
-router.get('/', (req,res) =>{
+router.get('/', async (req,res) =>{
     
     if(req.isAuthenticated()){
         const profile = req.user
-        res.render('account/index', {profile:profile, followButton:false})
+
+        const followersCount = await Follower.countDocuments({user:profile._id})
+        const followingsCount = await Following.countDocuments({user:profile._id})
+        const postsCount = await Post.countDocuments({user:profile._id})
+
+        res.render('account/index', {
+            profile:profile,
+            followersCount:followersCount,
+            followingCount:followingsCount,
+            postsCount:postsCount,
+            followButton:false,
+        })
     }else{
         res.render('account/index')
     }
@@ -51,15 +64,15 @@ router.get('/user/:user', async (req,res) =>{
                     return
                 }
 
-                const [followersCount, followingCount] = await Promise.all([
-                    Follower.countDocuments({user:person._id}),
-                    Following.countDocuments({user:person._id})
-                ])
+                const followersCount = await Follower.countDocuments({user:person._id})
+                const followingsCount = await Following.countDocuments({user:person._id})
+                const postsCount = await Post.countDocuments({user:profile._id})
 
                 res.render('account/index', {
                     profile:person,
                     followersCount:followersCount,
-                    followingCount:followingCount,
+                    followingCount:followingsCount,
+                    postsCount:postsCount,
                     followButton:true
                 })
 
