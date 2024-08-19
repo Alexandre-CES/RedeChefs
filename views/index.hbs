@@ -1,7 +1,7 @@
 <main>
 {{#each posts}}
     <article id="mainPage_article_post">
-        <a href="./posts/post/{{this._id}}">
+        <a href="{{routes.posts.id}}/{{this._id}}">
             <div>
                 {{#if this.imagePath}}
                 <img src="/{{this.imagePath}}" alt="{{this.title}}">

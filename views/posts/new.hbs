@@ -2,7 +2,7 @@
     <hr>
     <h1>Recipe</h1>
     <small class="txt-danger txt-small">(*)indicates that it's mandatory</small>
-    <form action="/posts/new" method="post" enctype="multipart/form-data">
+    <form action="{{routes.posts.new}}" method="post" enctype="multipart/form-data">
         <div>
             <label for="title">Title<span class="txt-danger">*</span>: </label> <br>
                 <input type="text" name="title" id="title" min="1" max="50" required>

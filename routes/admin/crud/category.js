@@ -1,17 +1,13 @@
 /*
     Made to create new stuff without needing to directly inserting into database
-
     TODO: admin validation
-
 */
 
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 
-require('../../../models/moderation/Admin')
 require('../../../models/post/Category')
-const Admin = mongoose.model('admins')
 const Category = mongoose.model('categories')
 
 const { validate } = require('../../../helpers/validateReqBody')

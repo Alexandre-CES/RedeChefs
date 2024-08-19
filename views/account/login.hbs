@@ -13,7 +13,7 @@
                 </div>
             </header>
             <section>
-                <form action="/account/login" method="post" autocomplete="off">
+                <form action="{{routes.login}}" method="post" autocomplete="off">
                     <section>
                         <label for="user"><i class="bi bi-person-fill"></i></label>
                         <input type="text" name="user" id="user" placeholder="user" min="5" max="20"  required>
@@ -29,7 +29,7 @@
             </section>
             <hr>
             <footer class="main-form-centered-footer">
-                <p>Not registered yet? <a href="/account/register">Register</a></p>
+                <p>Not registered yet? <a href="{{routes.register}}">Register</a></p>
             </footer>
         </main>
     </div>

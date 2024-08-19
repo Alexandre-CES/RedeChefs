@@ -1,6 +1,6 @@
 <main>
     {{#if category}}
-    <form action="/admin/crud/category/update" method="post">
+    <form action="{{routes.admin.category.update}}" method="post">
         <input type="hidden" name="categoryId" id="categoryId" value="{{category._id}}">
         <input type="text" name="newCategoryName" id="newCategoryName" value="{{category.category}}" placeholder="{{category.category}}">
         <button class="btn btn-large" type="submit">Edit</button>

@@ -9,18 +9,20 @@
     const passport = require('passport')
     const multer = require('multer')
 
-    //rotas
+    //routes
         const admin = require('./routes/admin/admin')
-        const account = require('./routes/account')
+        const account = require('./routes/account/account')
         const posts = require('./routes/posts')
         const errors = require('./routes/errors')
+
+        //routes file
+        const routes = require('./config/routes');
+        app.locals.routes = routes;
 
     //mongoose
         const mongoose = require('mongoose')
         require('./models/post/Post')
-        require('./models/post/Category')
         const Post = mongoose.model('posts')
-        const Category = mongoose.model('categories')
 
 //Configs
 
