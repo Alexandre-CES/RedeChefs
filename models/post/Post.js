@@ -34,14 +34,8 @@ const Post = new Schema({
         type: Date,
         default: Date.now()
     },
-
-    /*
-    *The database doesn't store images.
-    The images are stored in the uploads's folder when you upload them, then their path is stored at database for later use.
-    It's working, and i'm not planning store the actual images in db for now.
-    */
-    imagePath:{
-        type:String
+    image:{
+        //TODO: store images, of course
     }
 })
 

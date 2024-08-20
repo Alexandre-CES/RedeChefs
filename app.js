@@ -7,7 +7,6 @@
     const path = require('path')
     const session = require('express-session')
     const passport = require('passport')
-    const multer = require('multer')
 
     //routes
         const admin = require('./routes/admin/admin')
@@ -25,28 +24,6 @@
         const Post = mongoose.model('posts')
 
 //Configs
-
-    //Multer
-    const storage = multer.diskStorage({
-        destination: (req, file, cb) => {
-            cb(null, 'uploads/')
-        },
-        filename: (req, file, cb) => {
-            cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-        }
-    })
-    const fileFilter = (req, file, cb) => {
-        const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg']
-        if (allowedMimeTypes.includes(file.mimetype)) {
-            cb(null, true)
-        } else {
-            cb(new Error('Invalid file type. Only JPEG, PNG, and JPG are allowed.'), false)
-        }
-    }
-    const upload = multer({ 
-        storage: storage,
-        fileFilter: fileFilter
-    })
 
     //Session
         app.use(session({
@@ -68,12 +45,6 @@
         //custom
         app.use((req,res,next)=>{
             console.log(`Loading ${req.url}`)
-            next()
-        })
-
-        //multer
-        app.use((req, res, next) => {
-            req.upload = upload
             next()
         })
 
