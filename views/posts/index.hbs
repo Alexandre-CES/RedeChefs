@@ -2,9 +2,9 @@
     {{#if post}}
         <h1>{{post.title}}</h1>
 
-        {{#if post.imagePath}}
+        {{#if post.imageSrc}}
         <div id="post_image_box">
-            <img src="/{{post.imagePath}}" alt="">
+            <img src="{{post}}" alt="">
         </div>
         {{/if}}
 

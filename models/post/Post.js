@@ -35,7 +35,8 @@ const Post = new Schema({
         default: Date.now()
     },
     image:{
-        //TODO: store images, of course
+        type: Schema.Types.ObjectId,
+        ref: 'images'
     }
 })
 

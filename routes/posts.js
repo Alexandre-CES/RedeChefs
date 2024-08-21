@@ -4,17 +4,24 @@ const router = express.Router()
 const mongoose = require('mongoose')
 require('../models/post/Post')
 require('../models/post/Category')
+require('../models/post/Image')
 const Post = mongoose.model('posts')
 const Category = mongoose.model('categories')
+const Image = mongoose.model('images')
+
+const multer = require('multer')
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage })
 
 const { validate } = require('../helpers/validateReqBody')
 
 router.get('/post/:id', async (req,res)=>{
     
-    const id = req.params.id
-    const post = await Post.findOne({_id:id}).lean()
-
-    res.render('posts/index', {post:post})
+    const post = await Post.findById(req.params.id).populate('image').lean()
+    if (post.image) {
+        post.imageSrc = `data:${post.image.contentType};base64,${post.image.data.toString('base64')}`
+    }
+    res.render('posts/index', { post })
 })
 
 router.all('/new', async (req,res)=>{
@@ -38,6 +45,7 @@ router.all('/new', async (req,res)=>{
             }else{
                 
                 try{
+                    
                     const user = req.user._id
 
                     var splitIngredients = req.body.ingredients.split(',')
@@ -53,9 +61,6 @@ router.all('/new', async (req,res)=>{
                     //optional values
                     if(req.body.description){
                         postData.description = req.body.description
-                    }
-                    if (req.file) {
-                        postData.imagePath = req.file.path;
                     }
 
                     let categories = []
@@ -79,9 +84,9 @@ router.all('/new', async (req,res)=>{
                         postData.categories = categories
                     }
 
-                    await new Post(postData).save().then(()=>{
+                    await new Post(postData).save().then((post)=>{
                         console.log('Post created successfuly')
-                        res.redirect('/')
+                        res.redirect(`/posts/upload-image/${post._id}`)
                     }).catch((err)=>{
                         console.log('Error crating post: '+err)
                         res.redirect('/posts/new')
@@ -106,5 +111,36 @@ router.all('/new', async (req,res)=>{
         res.render('account/index', {message_error: 'Please, log in before post something!'})
     }
 })
+
+router.get('/upload-image/:postId', async (req,res)=>{
+    res.render('posts/image', {postId:req.params.postId})
+})
+
+router.post('/upload-image/:postId', upload.single('postImage'), async (req, res) => {
+    try {
+        if (!req.file) {
+            req.flash('error_msg', 'Nenhuma imagem foi enviada.')
+            //return res.redirect(`/posts/edit/${req.params.postId}`)
+            return res.redirect('/')
+        }
+
+        const newImage = new Image({
+            data: req.file.buffer,
+            contentType: req.file.mimetype
+        })
+        const savedImage = await newImage.save().then(()=>{
+            console.log('image saved successfuly')
+        })
+
+        await Post.findByIdAndUpdate(req.params.postId, { image: savedImage._id })
+
+        //res.redirect(`/post/${req.params.postId}`)
+        res.redirect('/')
+    } catch (err) {
+        req.flash('error_msg', 'Erro ao fazer upload da imagem: ' + err.message)
+        //res.redirect(`/posts/edit/${req.params.postId}`)
+        res.redirect('/')
+    }
+});
 
 module.exports = router
