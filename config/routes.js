@@ -6,7 +6,7 @@ module.exports = {
     //posts
     posts:{
         index:'/posts',
-        id:'posts/post',
+        id:'/posts/post',
         new:'/posts/new',
     },
     

@@ -16,12 +16,16 @@ const upload = multer({ storage: storage })
 const { validate } = require('../helpers/validateReqBody')
 
 router.get('/post/:id', async (req,res)=>{
-    
-    const post = await Post.findById(req.params.id).populate('image').lean()
-    if (post.image) {
-        post.imageSrc = `data:${post.image.contentType};base64,${post.image.data.toString('base64')}`
+    try{
+        const post = await Post.findById(req.params.id).populate('image').lean()
+        if (post.image) {
+            post.imageSrc = `data:${post.image.contentType};base64,${post.image.data.toString('base64')}`
+        }
+        res.render('posts/index', { post })
+    }catch(err){
+        req.flash('error_msg','error: '+err)
+        res.redirect('/')
     }
-    res.render('posts/index', { post })
 })
 
 router.all('/new', async (req,res)=>{

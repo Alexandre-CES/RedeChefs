@@ -23,6 +23,8 @@
         require('./models/post/Post')
         const Post = mongoose.model('posts')
 
+        mongoose.set('debug', true);
+
 //Configs
 
     //Session
