@@ -124,26 +124,33 @@ router.post('/upload-image/:postId', upload.single('postImage'), async (req, res
     try {
         if (!req.file) {
             req.flash('error_msg', 'Nenhuma imagem foi enviada.')
-            //return res.redirect(`/posts/edit/${req.params.postId}`)
-            return res.redirect('/')
+            res.redirect(`/posts/post/${req.params.postId}`)
         }
 
+        //image data
         const newImage = new Image({
             data: req.file.buffer,
             contentType: req.file.mimetype
         })
-        const savedImage = await newImage.save().then(()=>{
-            console.log('image saved successfuly')
-        })
 
-        await Post.findByIdAndUpdate(req.params.postId, { image: savedImage._id })
+        try{
+            //save image
+            const savedImage = await newImage.save()
 
-        //res.redirect(`/post/${req.params.postId}`)
-        res.redirect('/')
+            //relates image to post
+            await Post.findByIdAndUpdate(req.params.postId, { image: savedImage._id })
+            req.flash('success_msg','image adicionada')
+
+        }catch(err){
+            req.flash('error_msg','error: '+err)
+            res.redirect(`/posts/post/${req.params.postId}`)
+        }
+
+        res.redirect(`/posts/post/${req.params.postId}`)
+
     } catch (err) {
         req.flash('error_msg', 'Erro ao fazer upload da imagem: ' + err.message)
-        //res.redirect(`/posts/edit/${req.params.postId}`)
-        res.redirect('/')
+        res.redirect(`/posts/post/${req.params.postId}`)
     }
 });
 
