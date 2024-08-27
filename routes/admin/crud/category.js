@@ -17,7 +17,12 @@ router.get('/', async (req,res)=>{
     //search all categories alphabetically
     const categories = await Category.find({}).sort({category:1}).lean()
 
-    res.render('./admin/crud/category', {categories:categories})
+    console.log(req.flash('error_msg'))
+    res.render('./admin/crud/category', {
+        categories:categories,
+        error_msg:req.flash('error_msg'),
+        success_msg:req.flash('success_msg')
+    })
 })
 
 //*Creates a new category
@@ -34,6 +39,7 @@ router.post('/create', async (req,res)=>{
         const repeatedCategory = await Category.findOne({category:inputCategory})
         if (repeatedCategory){
             req.flash('error_msg', 'category already exist')
+            console.log('Flash message set:', req.flash('error_msg'));
             res.redirect('/admin/crud/category')
         }else{
             const categoryData ={

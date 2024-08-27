@@ -18,7 +18,6 @@ const Status = mongoose.model('status')
 
 router.all('/register', async (req, res) => {
     if (req.method == 'POST') {
-
         let rules = {
             user:{required:true, minLength:5, maxLength:20},
             password:{required:true, minLength:5, maxLength:30},
@@ -37,8 +36,8 @@ router.all('/register', async (req, res) => {
 
         if (errors.length > 0) {
             console.log(errors)
-            req.flash('error_msg', errors.join(', '))
-            res.render('account/register', { hide_menus: true, errors: errors, message: req.flash('error_msg') })
+            req.flash('error_msg', errors.join(',<br>'))
+            res.redirect('/account/auth/register')
         } else {
 
             //username = user if you leave the field blank
@@ -48,13 +47,8 @@ router.all('/register', async (req, res) => {
                 //check if user already exist
                 const existingUser = await User.findOne({ user: req.body.user })
                 if (existingUser) {
-                    errors.push('User already exists!')
-                    res.render('account/register', { 
-                        hide_menus: true,
-                        errors: errors,
-                        message: req.flash('error') 
-                    })
-                    return
+                    req.flash('error_msg','User already exists!')
+                    return res.redirect('/account/auth/register')
                 }
 
                 //encrypting password
@@ -71,9 +65,8 @@ router.all('/register', async (req, res) => {
                 if (req.body.email) {
                     const existingEmail = await User.findOne({ email: req.body.email })
                     if (existingEmail) {
-                        errors.push('Email already being used!')
-                        res.render('account/register', { hide_menus: true, errors: errors })
-                        return
+                        req.flash('error_msg','Email already being used!')
+                        return res.redirect('/account/auth/register')
                     }else{
                         userData.email = req.body.email
                     }
@@ -89,16 +82,22 @@ router.all('/register', async (req, res) => {
                 await new Status(userStatusData).save()
                 console.log('User status created successfully')
                 req.flash('success_msg', 'User created successfully')
-                res.redirect('/account/login')
+                res.redirect('/account/auth/login')
 
             } catch (err) {
                 console.error('Error creating user:', err)
                 req.flash('error_msg', 'Error creating user')
-                res.redirect('/account/register')
+                return res.redirect('/account/auth/register')
             }
         }
     } else {
-        res.render('account/register', { hide_menus: true })
+        const successMessages = res.locals.error_msg
+        console.log('message: ' + successMessages)
+        res.render('account/register', { 
+            hide_menus: true,
+            error_msg:res.locals.error_msg,
+            success_msg:res.locals.success_msg
+        })
     }
 })
 
@@ -120,7 +119,7 @@ router.get('/logout', (req,res,next)=>{
         if(err){
             return next(err)
         }    
-        req.flash('success_msg','')
+        req.flash('success_msg','Bye')
         res.redirect("/")
     })
 })

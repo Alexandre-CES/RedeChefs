@@ -31,7 +31,7 @@
         app.use(session({
             secret: 'SegredoSecreto',
             resave: true,
-            saveUninitialized: true
+            saveUninitialized: true,
         }))
 
         app.use(passport.initialize())
@@ -87,7 +87,11 @@
 app.get('/', async (req,res, next)=>{
     try{
         var postsData = await Post.find({}).lean()
-        res.render('index', {posts:postsData})
+        res.render('index', {
+            posts:postsData,
+            success_msg:res.locals.success_msg,
+            error_msg:res.locals.error_msg
+        })
     }catch(err){
         next(err)
     }

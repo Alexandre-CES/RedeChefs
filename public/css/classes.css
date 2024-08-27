@@ -110,9 +110,10 @@
 /* MESSAGE */
 
 .message_popup{
-    position: absolute;
+    z-index: 9999;
+    position: fixed;
 
-    top: 10%;
+    top: 5%;
     left: 50%;
     transform: translate(-50%, 0);
 
@@ -125,12 +126,19 @@
     text-align: left;
     font-size: 1.5em;
     text-shadow: 1px 1px rgba(0, 0, 0, 0.445);
-
-    color: white;
-    background-color: rgb(255, 60, 60);
 }
 
 .message_popup > div{
     min-width: 30px;
     height: 100%;
+}
+
+.message_popup-success{
+    color: rgb(19, 29, 18);
+    background-color: rgb(60, 255, 60);
+}
+
+.message_popup-error{
+    color: white;
+    background-color: rgb(255, 60, 60);
 }

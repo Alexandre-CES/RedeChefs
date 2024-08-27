@@ -1,11 +1,5 @@
 <div id="register-background">
     <div class="bg-transparency-50">
-        {{#if message}}
-            <div class="message_popup">
-                <div><i class="bi bi-info-circle"></i></div>
-                <span>{{message}}</span>
-            </div>
-        {{/if}}
         <main id="main-register-box" class="main-centered-box main-form-centered-box bg-transparency-50">
             <header class="main-form-centered-header">
                 <div>
@@ -16,27 +10,27 @@
                 <form action="{{routes.register}}" method="post" autocomplete="off">
                     <section>
                         <label for="username"><i class="bi bi-person"></i></label>
-                        <input type="text" name="username" id="username" placeholder="username (optional)" min="1" max="20" autofocus>
+                        <input type="text" name="username" id="username" placeholder="username (optional)" minlength="1" maxlength="20" autofocus>
                     </section>
 
                     <section>
                         <label for="user"><i class="bi bi-person-fill"></i></label>
-                        <input type="text" name="user" id="user" placeholder="user" min="5" max="20" required>
+                        <input type="text" name="user" id="user" placeholder="user" minlength="5" maxlength="20" required>
                     </section>
 
                     <section>
                         <label for="email"><i class="bi bi-envelope-fill"></i></label>
-                        <input type="email" name="email" id="email" placeholder="email (optional)" min="11" max="320">
+                        <input type="email" name="email" id="email" placeholder="email (optional)" minlength="11" maxlength="320">
                     </section>
 
                     <section>
                         <label for="password"><i class="bi bi-key-fill"></i></label>
-                        <input type="password" name="password" id="password" placeholder="password" min="5" max="30" required>
+                        <input type="password" name="password" id="password" placeholder="password" minlength="5" maxlength="30" required>
                     </section>
 
                     <section>
                         <label for="confirm_password"><i class="bi bi-key"></i></label>
-                        <input type="password" name="confirm_password" id="confirm_password" placeholder="confirm-password" min="5" max="30" required>
+                        <input type="password" name="confirm_password" id="confirm_password" placeholder="confirm-password" minlength="5" maxlength="30" required>
                     </section>
                     <div>
                         <button class="btn btn-small btn-colors" type="submit">Register</button>
