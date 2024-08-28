@@ -1,10 +1,10 @@
 <div id="register-background">
     <div class="bg-transparency-50">
-        {{#if message}}
-            <div class="message_popup">
-                <div><i class="bi bi-info-circle"></i></div>
-                <span>{{message}}</span>
-            </div>
+        {{#if error}}
+        <div class="message_popup message_popup-error">
+            <div><i class="bi bi-info-circle"></i></div>
+            <span>{{error}}</span>
+        </div>
         {{/if}}
         <main id="main-register-box" class="main-centered-box main-form-centered-box bg-transparency-50">
             <header class="main-form-centered-header">

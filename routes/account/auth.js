@@ -91,13 +91,7 @@ router.all('/register', async (req, res) => {
             }
         }
     } else {
-        const successMessages = res.locals.error_msg
-        console.log('message: ' + successMessages)
-        res.render('account/register', { 
-            hide_menus: true,
-            error_msg:res.locals.error_msg,
-            success_msg:res.locals.success_msg
-        })
+        res.render('account/register', {hide_menus: true})
     }
 })
 
@@ -106,11 +100,11 @@ router.all('/login', (req, res, next)=>{
         console.log(req.body);
         passport.authenticate('local', {
             successRedirect:'/',
-            failureRedirect:'/account/login',
+            failureRedirect:'/account/auth/login',
             failureFlash: true,
         })(req,res,next)
     }else{
-        res.render('account/login', {hide_menus:true, message: req.flash('error')})
+        res.render('account/login', {hide_menus:true, error: req.flash('error')})
     }
 })
 

@@ -19,10 +19,10 @@
             <div>
                 <div>{{category}}</div>
                 <div>
-                    <a class="btn btn-small btn-caution" href="{{routes.admin.category.update}}/{{_id}}"><i class="bi bi-pencil"></i></a>
-                    <form action="{{routes.admin.category.delete}}" method="post">
+                    <a class="btn btn-small btn-caution" href="{{../routes.admin.category.update}}/{{_id}}"><i class="bi bi-pencil"></i></a>
+                    <form action="{{../routes.admin.category.delete}}" method="post">
                         <input type="hidden" id="categoryId" name="categoryId" value="{{_id}}">
-                        <button class="btn btn-small btn-danger" href="#"><i class="bi bi-trash"></i></button>
+                        <button type="submit" class="btn btn-small btn-danger"><i class="bi bi-trash"></i></button>
                     </form>
                 </div>
             </div>

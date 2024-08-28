@@ -89,10 +89,10 @@ router.all('/new', async (req,res)=>{
                     }
 
                     await new Post(postData).save().then((post)=>{
-                        console.log('Post created successfuly')
+                        req.flash('success_msg','Post created successfully')
                         res.redirect(`/posts/upload-image/${post._id}`)
                     }).catch((err)=>{
-                        console.log('Error crating post: '+err)
+                        req.flash('error_msg',err)
                         res.redirect('/posts/new')
                     })
 
@@ -112,7 +112,8 @@ router.all('/new', async (req,res)=>{
             res.render('posts/new', {optdiet:optdiet, optMealTimes:optMealTimes})
         }
     }else{
-        res.render('account/index', {message_error: 'Please, log in before post something!'})
+        req.flash('error_msg','Please, log in before post something!')
+        res.redirect('/account/')
     }
 })
 
@@ -139,7 +140,7 @@ router.post('/upload-image/:postId', upload.single('postImage'), async (req, res
 
             //relates image to post
             await Post.findByIdAndUpdate(req.params.postId, { image: savedImage._id })
-            req.flash('success_msg','image adicionada')
+            req.flash('success_msg','image added')
 
         }catch(err){
             req.flash('error_msg','error: '+err)
@@ -149,7 +150,7 @@ router.post('/upload-image/:postId', upload.single('postImage'), async (req, res
         res.redirect(`/posts/post/${req.params.postId}`)
 
     } catch (err) {
-        req.flash('error_msg', 'Erro ao fazer upload da imagem: ' + err.message)
+        req.flash('error_msg', 'Error uploading image: ' + err)
         res.redirect(`/posts/post/${req.params.postId}`)
     }
 });

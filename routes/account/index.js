@@ -72,8 +72,7 @@ router.get('/user/:user', async (req,res) =>{
                 })
 
             } catch (err){
-                req.flash('error_msg', 'Error fetching user data')
-                console.log(err)
+                req.flash('error_msg', err)
                 res.redirect('/')
             }
         }
@@ -83,6 +82,7 @@ router.get('/user/:user', async (req,res) =>{
         User.findOne({user:requestedUser}).lean().then((person)=>{
             res.render('account/index', {profile:person})
         }).catch((err)=>{
+            req.flash('error_msg',err)
             res.redirect('/')
         })
     }

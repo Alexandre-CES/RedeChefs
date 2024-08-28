@@ -18,11 +18,7 @@ router.get('/', async (req,res)=>{
     const categories = await Category.find({}).sort({category:1}).lean()
 
     console.log(req.flash('error_msg'))
-    res.render('./admin/crud/category', {
-        categories:categories,
-        error_msg:req.flash('error_msg'),
-        success_msg:req.flash('success_msg')
-    })
+    res.render('./admin/crud/category', {categories:categories})
 })
 
 //*Creates a new category
@@ -39,7 +35,6 @@ router.post('/create', async (req,res)=>{
         const repeatedCategory = await Category.findOne({category:inputCategory})
         if (repeatedCategory){
             req.flash('error_msg', 'category already exist')
-            console.log('Flash message set:', req.flash('error_msg'));
             res.redirect('/admin/crud/category')
         }else{
             const categoryData ={
@@ -96,13 +91,15 @@ router.post('/delete', async (req,res)=>{
 
     if (!categoryId){
         req.flash('error_msg', 'No category detected')
-        res.redirect('/admin/crud/category', {message:'No category detected'})
+        return res.redirect('/admin/crud/category', {message:'No category detected'})
     }
 
     Category.deleteOne({_id:categoryId}).then(()=>{
-        console.log('success')
         req.flash('success_msg', 'Category deleted successfuly')
-        res.redirect('/admin/crud/category')
+        return res.redirect('/admin/crud/category')
+    }).catch((err)=>{
+        req.flash('error_msg', err)
+        return res.redirect('/admin/crud/category')
     })
 })
 

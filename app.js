@@ -56,6 +56,7 @@
             res.locals.success_msg = req.flash('success_msg')
             res.locals.error_msg = req.flash('error_msg')
             res.locals.error_code = req.flash('error_code')
+            
             next()
         })
         
