@@ -43,7 +43,6 @@ router.all('/new', async (req,res)=>{
             }
             const errors = validate(req.body, rules)   
             if(errors.length > 0){
-                console.log(errors)
                 req.flash('error_msg', errors.join(', '))
                 res.redirect('/posts/new')
             }else{

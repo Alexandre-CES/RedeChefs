@@ -20,22 +20,26 @@
 //Rotas
 router.get('/', async (req,res) =>{
     
-    if(req.isAuthenticated()){
-        const profile = req.user
+    try{
+        if(req.isAuthenticated()){
+            const profile = req.user
 
-        const followersCount = await Follower.countDocuments({user:profile._id})
-        const followingsCount = await Following.countDocuments({user:profile._id})
-        const postsCount = await Post.countDocuments({user:profile._id})
+            const followersCount = await Follower.countDocuments({user:profile._id})
+            const followingsCount = await Following.countDocuments({user:profile._id})
+            const postsCount = await Post.countDocuments({user:profile._id})
 
-        res.render('account/index', {
-            profile:profile,
-            followersCount:followersCount,
-            followingCount:followingsCount,
-            postsCount:postsCount,
-            followButton:false,
-        })
-    }else{
-        res.render('account/index')
+            res.render('account/index', {
+                profile:profile,
+                followersCount:followersCount,
+                followingCount:followingsCount,
+                postsCount:postsCount,
+                followButton:false,
+            })
+        }else{
+            res.render('account/index')
+        }
+    }catch(err){
+        res.render('errors/index',{errorMessage:err})
     }
 })
 
@@ -55,8 +59,8 @@ router.get('/user/:user', async (req,res) =>{
                 
                 const person = await User.findOne({ user:requestedUser }).lean()
                 if (!person) {
-                    res.redirect('/')
-                    return
+                    req.flash('error_msg','User unavalible')
+                    return res.redirect('/')
                 }
 
                 const followersCount = await Follower.countDocuments({user:person._id})

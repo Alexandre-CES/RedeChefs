@@ -1,6 +1,6 @@
 /*
     Made to create new stuff without needing to directly inserting into database
-    TODO: admin validation
+    TODO: admin that create other admins
 */
 
 const express = require('express')
@@ -15,10 +15,12 @@ const { validate } = require('../../../helpers/validateReqBody')
 router.get('/', async (req,res)=>{
 
     //search all categories alphabetically
-    const categories = await Category.find({}).sort({category:1}).lean()
-
-    console.log(req.flash('error_msg'))
-    res.render('./admin/crud/category', {categories:categories})
+    const categories = await Category.find({}).sort({category:1}).lean().then(()=>{
+        res.render('./admin/crud/category', {categories:categories})
+    }).catch((err)=>{
+        req.flash('error_msg',err)
+        res.redirect('/admin')
+    })    
 })
 
 //*Creates a new category
@@ -91,7 +93,7 @@ router.post('/delete', async (req,res)=>{
 
     if (!categoryId){
         req.flash('error_msg', 'No category detected')
-        return res.redirect('/admin/crud/category', {message:'No category detected'})
+        return res.redirect('/admin/crud/category')
     }
 
     Category.deleteOne({_id:categoryId}).then(()=>{

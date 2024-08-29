@@ -73,7 +73,6 @@ router.all('/register', async (req, res) => {
                 }
 
                 const savedUser = await new User(userData).save()
-                console.log('User created successfully:', savedUser)
 
                 const userStatusData = {
                     user: savedUser._id

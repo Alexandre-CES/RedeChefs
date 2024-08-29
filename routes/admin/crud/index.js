@@ -15,16 +15,20 @@ const Admin = mongoose.model('admins')
 router.get('/', async (req,res)=>{
 
     const userId = req.user._id
-    const adminUser = await Admin.findOne({user:userId})
+    await Admin.findOne({user:userId}).then((admin)=>{
 
-    //check if user has permission
-    let isOwner = false
-    if(adminUser.type == 'owner'){
-        isOwner = true
-    }
+        //check if user has permission
+        let isOwner = false
+        if(admin.type == 'owner'){
+            isOwner = true
+        }
 
-    res.render('admin/crud/index', {isOwner:isOwner})
-  
+        res.render('admin/crud/index', {isOwner:isOwner})
+        
+    }).catch((err)=>{
+        req.flash('error_msg',err)
+        res.redirect('/admin')
+    })
 })
 
 module.exports = router

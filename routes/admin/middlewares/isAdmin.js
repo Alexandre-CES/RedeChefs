@@ -13,16 +13,13 @@ module.exports = async (req,res,next)=>{
             if (adminUser) {
                 return next()
             } else {
-                req.flash('error_msg', 'Access denied: You are not an admin.')
                 return res.redirect('/')
             }
         } else {
-            req.flash('error_msg', 'Please log in to view this resource.')
             return res.redirect('/')
         }
     } catch (err) {
-        console.error('Error checking admin privileges:', err)
-        req.flash('error_msg', 'An error occurred while checking privileges.')
+        req.flash('error_msg', 'An error occurred while checking privileges: '+err)
         return res.redirect('/')
     }
 }
