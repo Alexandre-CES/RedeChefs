@@ -20,6 +20,9 @@ module.exports = {
             update:'/admin/crud/category/update',
             delete:'/admin/crud/category/delete',
         },
+        admin:{
+            index:'/admin/crud/admin'
+        },
         reports:'/admin/reports',
     } 
 };
