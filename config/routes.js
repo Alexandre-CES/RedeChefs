@@ -21,7 +21,9 @@ module.exports = {
             delete:'/admin/crud/category/delete',
         },
         admin:{
-            index:'/admin/crud/admin'
+            index:'/admin/crud/admin',
+            create:'/admin/crud/admin/create',
+            delete:'/admin/crud/admin/delete',
         },
         reports:'/admin/reports',
     } 

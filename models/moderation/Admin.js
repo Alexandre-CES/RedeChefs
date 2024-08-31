@@ -15,6 +15,7 @@ const Admin = new Schema({
         type: String,
         enum: [
             'owner',
+            'admin',
             'staff'
         ],
         required: true

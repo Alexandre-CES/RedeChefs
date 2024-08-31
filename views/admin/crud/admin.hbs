@@ -1,12 +1,21 @@
 <main>
     <h2>Add admin</h2>
-    <form action="" method="post">
-        <label for="userId"></label>
-        <input type="text" name="userId" id="userId">
+    <form action="{{routes.admin.admin.create}}" method="post">
+        <label for="userId">User ID:</label>
+        <input type="text" name="userId" id="userId" minlength="1" required>
+        <div>
+            <label for="admin">Admin: </label>
+            <input type="radio" name="role" id="admin">
+
+            <label for="staff">Staff: </label>
+            <input type="radio" name="role" id="staff">
+        </div>
+        <button type="submit">Submit</button>
     </form>
     <h2>Delete admin</h2>
-    <form action="" method="post">
-        <label for="userId"></label>
-        <input type="text" name="userId" id="userId">
+    <form action="{{routes.admin.admin.delete}}" method="post">
+        <label for="userId">User ID:</label>
+        <input type="text" name="userId" id="userId" minlength="1" required>
+        <button type="submit">Submit</button>
     </form>
 </main>
