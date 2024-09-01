@@ -126,6 +126,8 @@
     text-align: left;
     font-size: 1em;
     text-shadow: 1px 1px rgba(0, 0, 0, 0.445);
+
+    color: white;
 }
 
 .message_popup > div{
@@ -134,11 +136,9 @@
 }
 
 .message_popup-success{
-    color: rgb(19, 29, 18);
-    background-color: rgb(60, 255, 60);
+    background-color: rgb(0, 138, 0);
 }
 
 .message_popup-error{
-    color: white;
     background-color: rgb(255, 60, 60);
 }

@@ -34,16 +34,24 @@ router.post('/create', async (req,res)=>{
             res.redirect('/admin/crud/admin/')
         }else{
 
-            const isAdmin = Admin.findOne({user:req.body.userId}).lean()
+            const isAdmin = await Admin.findOne({user:req.body.userId}).lean()
 
             if(isAdmin){
-                req.flash('error_msg','User is already admin')
+                req.flash('error_msg','User is already an admin')
                 res.redirect('/admin/crud/admin/')
             }else{
 
+                console.log(req.body.type)
+
                 const adminData = {
-                    user:req.body.userId
+                    user:req.body.userId,
+                    type:req.body.role
                 }
+
+                await new Admin(adminData).save().then(()=>{
+                    req.flash('success_msg','Admin added successfully')
+                    res.redirect('/admin/crud/admin')
+                })
             }
         }
     }
