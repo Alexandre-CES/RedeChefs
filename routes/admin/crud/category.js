@@ -1,6 +1,5 @@
 /*
     Made to create new stuff without needing to directly inserting into database
-    TODO: admin that create other admins
 */
 
 const express = require('express')

@@ -11,7 +11,22 @@ const { validate } = require('../../../helpers/validateReqBody')
 
 router.get('/', async (req,res)=>{
 
-    res.render('admin/crud/admin')  
+    const userId = req.user._id
+    await Admin.findOne({user:userId}).then((admin)=>{
+
+        let isOwner = false
+        if(admin.type == 'owner'){
+            isOwner = true
+        }
+
+        res.render('admin/crud/admin',{isOwner:isOwner})
+    
+    }).catch((err)=>{
+        req.flash('error_msg',err)
+        res.redirect('/admin/crud/')
+    })
+
+      
 })
 
 router.post('/create', async (req,res)=>{

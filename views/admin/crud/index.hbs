@@ -9,6 +9,10 @@
 <main id="admin-main-centered-box" class="main-centered-box main-centered-menu">
     <menu>
         <a href="{{routes.admin.category.index}}" class="btn btn-large btn-colors">Category</a>
+
+        {{#if canModifyAdmin}}
         <a href="{{routes.admin.admin.index}}" class="btn btn-large btn-colors">Admin</a>
+        {{/if}}
+
     </menu>
 </main>

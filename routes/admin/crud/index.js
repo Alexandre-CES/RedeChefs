@@ -1,7 +1,5 @@
 /*
     *crud's index page
-
-    TODO: I want to give certain people the power to create other admins
 */
 
 const express = require('express')
@@ -18,12 +16,12 @@ router.get('/', async (req,res)=>{
     await Admin.findOne({user:userId}).then((admin)=>{
 
         //check if user has permission
-        let isOwner = false
-        if(admin.type == 'owner'){
-            isOwner = true
+        let canModifyAdmin = false
+        if(admin.type == 'owner' || admin.type == 'admin'){
+            canModifyAdmin = true
         }
 
-        res.render('admin/crud/index', {isOwner:isOwner})
+        res.render('admin/crud/index', {canModifyAdmin:canModifyAdmin})
         
     }).catch((err)=>{
         req.flash('error_msg',err)

@@ -4,11 +4,15 @@
         <label for="userId">User ID:</label>
         <input type="text" name="userId" id="userId" minlength="1" required>
         <div>
-            <label for="admin">Admin: </label>
-            <input type="radio" name="role" id="admin" value="admin">
-
+            
             <label for="staff">Staff: </label>
             <input type="radio" name="role" id="staff" value="staff">
+
+            {{#if isOwner}}
+            <label for="admin">Admin: </label>
+            <input type="radio" name="role" id="admin" value="admin">
+            {{/if}}
+
         </div>
         <button type="submit">Submit</button>
     </form>
