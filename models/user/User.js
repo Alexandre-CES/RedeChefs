@@ -23,6 +23,13 @@ const User = new Schema({
     creationDate:{
         type: Date,
         default: Date.now()
+    },
+    picture:{
+        type: Schema.Types.ObjectId,
+        ref: 'images'
+    },
+    bio:{
+        type: String
     }
 })
 
