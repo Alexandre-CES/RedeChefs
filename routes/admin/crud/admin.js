@@ -72,4 +72,26 @@ router.post('/create', async (req,res)=>{
     }
 })
 
+router.post('/delete', async (req,res)=>{
+    const rules = {
+        userId:{required:true, minLength:1}
+    }
+
+    const errors = validate(req.body, rules)
+
+    if(errors.length > 0){
+        req.flash('error_msg',errors)
+        res.redirect('/admin/crud/admin/')
+    }else{
+        await Admin.findOneAndDelete({user:req.body.userId}).then((user)=>{
+            req.flash('success_msg',`User ${user.user} deleted successfully`)
+            res.redirect('/admin/crud/admin/')
+        }).catch((err)=>{
+            req.flash('error_msg',err)
+            res.redirect('/admin/crud/admin/')
+        })
+
+    }
+})
+
 module.exports = router
