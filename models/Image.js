@@ -1,3 +1,7 @@
+/*
+    *Model for images
+*/
+
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 

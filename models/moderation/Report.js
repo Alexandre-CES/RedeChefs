@@ -1,3 +1,6 @@
+/*
+    *Model for reports
+*/
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 

@@ -1,3 +1,6 @@
+/*
+    *Application routes
+*/
 module.exports = {
     //auth
     login: '/account/auth/login',

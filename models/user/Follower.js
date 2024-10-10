@@ -1,5 +1,5 @@
 /*
-    User linked with his follower
+    *User linked with his follower
 */
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema

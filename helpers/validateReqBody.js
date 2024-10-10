@@ -1,7 +1,9 @@
 module.exports.validate = (data, rules) => {
+    /* Validate each field of the req.body
+    
+    The argument "data" is the req.body itself, and the argument "rules" is a dictionary of rules that must be followed. This function returns a list of errors. If every rule of the dictionary "rules" are ok in data, it will return a empty list */
     let errors = []
 
-    //validate each field
     for (const field in rules) {
         const value = data[field]
         const rule = rules[field]

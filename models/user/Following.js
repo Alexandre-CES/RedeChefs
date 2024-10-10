@@ -1,5 +1,5 @@
 /*
-    User linked to person he is fallowing
+    *User linked to person he is fallowing
 */
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
