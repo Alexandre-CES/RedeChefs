@@ -87,7 +87,15 @@
 
 app.get('/', async (req,res, next)=>{
     try{
-        var postsData = await Post.find({}).lean()
+        var postsData = await Post.find({}).lean().populate('image').lean()
+
+        postsData = postsData.map(post => {
+            if (post.image) {
+                post.imageSrc = `data:${post.image.contentType};base64,${post.image.data.toString('base64')}`
+            }
+            return post
+        })
+
         res.render('index', {
             posts:postsData,
             success_msg:res.locals.success_msg,

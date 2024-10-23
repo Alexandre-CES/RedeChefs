@@ -3,8 +3,8 @@
     <article id="mainPage_article_post">
         <a href="{{@root.routes.posts.id}}/{{this._id}}">
             <div>
-                {{#if this.imagePath}}
-                <img src="/{{this.imagePath}}" alt="{{this.title}}">
+                {{#if this.imageSrc}}
+                <img src="{{this.imageSrc}}" alt="{{this.title}}">
                 {{/if}}
             </div>
             <h1>{{this.title}}</h1>
