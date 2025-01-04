@@ -17,10 +17,13 @@
     const Following = mongoose.model('following')
     const Post = mongoose.model('posts')
 
-//Rotas
+//Routes
+
+//user profile page
 router.get('/', async (req,res) =>{
     
     try{
+        //if user is authenticated, show his profile
         if(req.isAuthenticated()){
             const profile = req.user
 
@@ -35,6 +38,8 @@ router.get('/', async (req,res) =>{
                 postsCount:postsCount,
                 followButton:false,
             })
+
+        //if user isn't authenticated, render page without any user
         }else{
             res.render('account/index')
         }
@@ -81,7 +86,7 @@ router.get('/user/:user', async (req,res) =>{
             }
         }
 
-    //if user not logged, just show the account
+    //if user not logged, just show the profile page
     }else{
         User.findOne({user:requestedUser}).lean().then((person)=>{
             res.render('account/index', {profile:person})

@@ -15,7 +15,7 @@
         const errors = require('./routes/errors')
 
         //routes file
-        const routes = require('./config/routes');
+        const routes = require('./config/routes')
         app.locals.routes = routes;
 
     //mongoose
@@ -118,7 +118,7 @@ app.use((err, req, res, next) => {
 })
 
 //App starting
-    const PORT = 8081
-    app.listen(PORT, ()=>{
-        console.log(`Server running at http://Localhost:${PORT}`)
-    })
+const PORT = 8081
+app.listen(PORT, ()=>{
+    console.log(`Server running at http://Localhost:${PORT}`)
+})

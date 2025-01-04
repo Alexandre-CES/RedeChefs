@@ -1,3 +1,9 @@
+/*
+    Every code related to posts
+
+    see post - create - upload image
+*/
+
 const express = require('express')
 const router = express.Router()
 

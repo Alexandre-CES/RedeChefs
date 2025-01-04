@@ -1,3 +1,9 @@
+/*
+    *Check if user is admin
+
+    pages related to admins can only by accessed by admins, so this checks every time you make a request to see if you are a admin before letting you access. 
+*/
+
 const mongoose = require('mongoose')
 require('../../../models/moderation/Admin')
 const Admin = mongoose.model('admins')

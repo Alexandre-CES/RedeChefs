@@ -1,3 +1,9 @@
+/*
+    *Every route responsible for authentication
+
+    register - login - logout
+*/
+
 const express = require('express')
 const router = express.Router()
 
@@ -24,6 +30,7 @@ router.all('/register', async (req, res) => {
             confirm_password:{required:true, minLength:5, maxLength:30}
         }
 
+        //make sure email will follow this structure
         if(req.body.email){
             rules.email = { regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ }
         }
@@ -35,7 +42,6 @@ router.all('/register', async (req, res) => {
         }
 
         if (errors.length > 0) {
-            console.log(errors)
             req.flash('error_msg', errors.join(',<br>'))
             res.redirect('/account/auth/register')
         } else {
@@ -79,12 +85,10 @@ router.all('/register', async (req, res) => {
                 }
 
                 await new Status(userStatusData).save()
-                console.log('User status created successfully')
                 req.flash('success_msg', 'User created successfully')
                 res.redirect('/account/auth/login')
 
             } catch (err) {
-                console.error('Error creating user:', err)
                 req.flash('error_msg', 'Error creating user')
                 return res.redirect('/account/auth/register')
             }
@@ -96,7 +100,6 @@ router.all('/register', async (req, res) => {
 
 router.all('/login', (req, res, next)=>{
     if(req.method == 'POST'){
-        console.log(req.body);
         passport.authenticate('local', {
             successRedirect:'/',
             failureRedirect:'/account/auth/login',
